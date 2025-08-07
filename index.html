@@ -972,7 +972,7 @@
     </div>
 
   <script>
-    // Sistema de Tradução
+    // Sistema de Tradução — Revisado e Corrigido
     const translations = {
       pt: {
         // Títulos
@@ -1219,34 +1219,25 @@
       }
     };
 
-    // Função para mudar idioma
     function changeLanguage(lang) {
       const elements = document.querySelectorAll('[data-translate]');
-      
       elements.forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
-          // Se for um input ou textarea, atualizar placeholder
           if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
             element.placeholder = translations[lang][key];
           } else {
-            // Usar innerHTML para permitir formatação e quebras de linha
             element.innerHTML = translations[lang][key];
           }
         }
       });
-      
-      // Salvar preferência no localStorage
       localStorage.setItem('selectedLanguage', lang);
     }
 
-    // Carregar idioma salvo ou detectar idioma do navegador
     function loadLanguage() {
       const savedLang = localStorage.getItem('selectedLanguage');
       const browserLang = navigator.language.split('-')[0];
-      
-      let lang = 'pt'; // Padrão
-      
+      let lang = 'pt';
       if (savedLang) {
         lang = savedLang;
       } else if (browserLang === 'en') {
@@ -1254,13 +1245,18 @@
       } else if (browserLang === 'es') {
         lang = 'es';
       }
-      
-      // Definir o valor do select
       document.getElementById('language-select').value = lang;
-      
-      // Aplicar tradução
       changeLanguage(lang);
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Corrigir: garantir que o evento está conectado
+      document.getElementById('language-select').addEventListener('change', function(e) {
+        changeLanguage(e.target.value);
+      });
+      loadLanguage();
+      // ... outras funções de inicialização ...
+    });
 
     function handleFormSubmit(event) {
       event.preventDefault();
@@ -2010,7 +2006,7 @@
      });
 
     // ... existing code ...
-    <script>
+      
       // Função para buscar PDFs do arquivo compartilhado
       async function fetchPDFs() {
         try {
@@ -2085,7 +2081,6 @@
         displayMainPagePDFs();
         displayWelcomeMessage();
       });
-    </script>
   </script>
 </body>
 </html>
