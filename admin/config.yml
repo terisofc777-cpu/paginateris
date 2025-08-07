@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: carlo/temploteris # Substitua pelo seu usuário/repositorio
+  branch: main # ou 'master' se for o seu caso
+  auth_scope: repo
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "pdfs"
+    label: "PDFs"
+    label_singular: "PDF"
+    description: "Gerencie os PDFs do site."
+    files:
+      - file: "pdfs.json"
+        label: "Lista de PDFs"
+        name: "pdfs"
+        fields:
+          - label: "PDFs"
+            name: "pdfs"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Título", name: "title", widget: "string"}
+              - {label: "Link", name: "link", widget: "string"}
+              - {label: "Idioma", name: "language", widget: "select", options: ["pt", "en", "es"]}
+              - {label: "Categoria", name: "category", widget: "select", options: ["manual", "guide", "tutorial", "other"]}
+              - {label: "Data de Adição", name: "dateAdded", widget: "string"}
+  - name: "customization"
+    label: "Personalização"
+    files:
+      - file: "customization.json"
+        label: "Personalização do Site"
+        name: "customization"
+        fields:
+          - {label: "Mensagem de Boas-vindas", name: "welcomeMessage", widget: "string"}
+          - {label: "Título do Site", name: "siteTitle", widget: "string"}

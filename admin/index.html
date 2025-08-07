@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <title>Painel ADM - Netlify CMS</title>
+    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+  </head>
+  <body>
+    <script>
+      // Redireciona para o painel do Netlify CMS
+      if (window.location.pathname.endsWith('/admin/') || window.location.pathname.endsWith('/admin/index.html')) {
+        window.location.href = 'admin/';
+      }
+    </script>
+  </body>
+</html>

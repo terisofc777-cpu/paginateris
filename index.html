@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teris | Subliminares</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Georgia", serif;
+      background-color: #000000;
+      color: #ffffff;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #111111;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+    
+    h1, h2, h3 {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+    
+    h1 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    h2 {
+      font-size: 1.8em;
+      border-bottom: 2px solid #ffffff;
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      border-left: 4px solid #ffffff;
+    }
+    
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border: 2px solid #333333;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 16px;
+      background-color: #222222;
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    
+    button {
+      background: linear-gradient(45deg, #8B0000, #DC143C);
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      padding: 15px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    /* Animações para elementos da página */
+    .section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Melhorias para os modais */
+    .order-modal-content {
+      animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    /* Efeitos de hover para links */
+    .pdf-links a {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .pdf-links a:hover {
+      transform: translateX(5px);
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
+    }
+    
+    /* Melhorias para inputs */
+    input, textarea, select {
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      transform: scale(1.02);
+    }
+    
+    /* Efeito de loading */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    button:hover {
+      background: linear-gradient(45deg, #DC143C, #8B0000);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+    }
+    
+    .pdf-links a {
+      display: block;
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #222222;
+      border-radius: 8px;
+      border-left: 4px solid #ffffff;
+      transition: all 0.3s ease;
+    }
+    
+    .pdf-links a:hover {
+      background-color: #333333;
+      transform: translateX(5px);
+    }
+    
+    .success-message {
+      color: #00ff00;
+      margin-top: 10px;
+      display: none;
+      padding: 10px;
+      background-color: #1a3a1a;
+      border-radius: 5px;
+    }
+    
+    .status-box {
+      background-color: #1a1a1a;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .status-box h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    
+    .construction-box {
+      background-color: #1a1a1a;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .construction-box h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    
+    .contact-info {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .contact-info p {
+      margin-bottom: 10px;
+    }
+    
+    /* Estilos do Seletor de Idioma */
+    .language-selector {
+      text-align: right;
+      margin-bottom: 8px;
+      padding: 2px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .language-selector select {
+      background-color: #111111;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      min-width: 35px;
+    }
+    
+    .language-selector select:focus {
+      outline: none;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    }
+    
+    .language-selector select:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+    
+    /* Estilos para as opções do dropdown */
+    .language-selector select option {
+      background-color: #222222;
+      color: #ffffff;
+      padding: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .language-selector select option:hover {
+      background-color: #00ffff;
+      color: #000000;
+    }
+    
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      h2 {
+        font-size: 1.5em;
+      }
+      
+      .section {
+        padding: 15px;
+      }
+    }
+
+    /* Estilos do Modal */
+    .modal {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #111111;
+      margin: 5% auto;
+      padding: 0;
+      border: 2px solid #8B0000;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      background: linear-gradient(45deg, #8B0000, #DC143C);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 13px 13px 0 0;
+      text-align: center;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.8em;
+    }
+
+    .modal-body {
+      padding: 30px;
+      color: #ffffff;
+    }
+
+    .modal-body p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .modal-body ul {
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+
+    .modal-body li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .modal-body a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .modal-body a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .modal-footer {
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #333333;
+    }
+
+    .modal-button {
+      background: linear-gradient(45deg, #8B0000, #DC143C);
+      color: #ffffff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background: linear-gradient(45deg, #DC143C, #8B0000);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+    }
+
+         @media (max-width: 600px) {
+       .modal-content {
+         width: 95%;
+         margin: 10% auto;
+       }
+       
+       .modal-header h2 {
+         font-size: 1.5em;
+       }
+       
+       .modal-body {
+         padding: 20px;
+       }
+       
+       .modal-body p, .modal-body li {
+         font-size: 14px;
+       }
+     }
+
+     /* Estilos para os botões de modal */
+     .modal-trigger-btn {
+       width: 100%;
+       padding: 20px;
+       border: none;
+       border-radius: 10px;
+       color: #ffffff;
+       font-size: 16px;
+       font-weight: bold;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       text-align: center;
+       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+     }
+
+     .modal-trigger-btn:hover {
+       transform: translateY(-3px);
+       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+     }
+
+     /* Estilos para os modais de pedidos */
+     .order-modal {
+       display: none;
+       position: fixed;
+       z-index: 1001;
+       left: 0;
+       top: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.9);
+       overflow-y: auto;
+     }
+
+     .order-modal-content {
+       background-color: #111111;
+       margin: 2% auto;
+       padding: 0;
+       border: 2px solid #ffffff;
+       border-radius: 15px;
+       width: 90%;
+       max-width: 800px;
+       box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+       animation: modalSlideIn 0.3s ease-out;
+     }
+
+     .order-modal-header {
+       background: linear-gradient(45deg, #8B0000, #DC143C);
+       color: #ffffff;
+       padding: 25px;
+       border-radius: 13px 13px 0 0;
+       text-align: center;
+     }
+
+     .order-modal-header h2 {
+       margin: 0;
+       color: #ffffff;
+       font-size: 2em;
+     }
+
+     .order-modal-body {
+       padding: 30px;
+       color: #ffffff;
+       max-height: 70vh;
+       overflow-y: auto;
+     }
+
+     .order-modal-footer {
+       padding: 20px;
+       text-align: center;
+       border-top: 1px solid #333333;
+     }
+
+     .order-modal-button {
+       background: linear-gradient(45deg, #8B0000, #DC143C);
+       color: #ffffff;
+       border: none;
+       padding: 12px 30px;
+       border-radius: 25px;
+       font-size: 16px;
+       font-weight: bold;
+       cursor: pointer;
+       transition: all 0.3s ease;
+     }
+
+     .order-modal-button:hover {
+       background: linear-gradient(45deg, #DC143C, #8B0000);
+       transform: translateY(-2px);
+       box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+     }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Seletor de Idioma -->
+    <div class="language-selector">
+      <select id="language-select" onchange="changeLanguage(this.value)">
+        <option value="pt">PT</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+    </div>
+
+    <h1 data-translate="title">Canal Teris</h1>
+    <p style="text-align: center; margin-bottom: 30px;">
+      <a href="https://youtube.com/@teris_ofc_777" target="_blank" style="font-size: 18px; font-weight: bold;">
+        🎥 <span data-translate="visit-channel">Visite meu canal no YouTube</span>
+      </a>
+    </p>
+    
+    <!-- Mensagem de Boas-vindas Personalizável -->
+    <div id="welcome-message-container" class="section" style="background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-left: 4px solid #ff69b4; margin-bottom: 30px; text-align: center;">
+      <div id="welcome-message-content">
+        <h3 style="color: #ff69b4; margin-bottom: 15px;" data-translate="welcome-title">🌟 Bem-vindo ao Canal Teris!</h3>
+        <p style="color: #ffffff; font-size: 16px; line-height: 1.6;" data-translate="welcome-description">
+          Aqui você encontrará subliminares personalizados, manuais exclusivos e muito mais para sua transformação pessoal.
+        </p>
+      </div>
+    </div>
+
+    <div class="section" style="background:#000000; border-left:4px solid #8B0000; margin-bottom:30px;">
+      <h2 style="color:#8B0000; margin-bottom:10px;" data-translate="video-schedule-title">📅 Cronograma de Vídeos</h2>
+      <p style="color:#8B0000; font-size:16px;" data-translate="video-schedule-description">
+        O número máximo de vídeos por vez é de <strong>2 a 3</strong>. Em ocasiões especiais, podem ser liberados até <strong>5 vídeos</strong>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2 data-translate="manuals-title">📚 Manuais PDF</h2>
+      <div id="dynamic-pdfs-container" class="pdf-links">
+        <!-- PDFs dinâmicos serão carregados aqui -->
+        <div style="text-align: center; color: #ffffff; opacity: 0.7; padding: 20px;">
+          📚 Carregando PDFs...
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 data-translate="transformation-guide">🔧 Guia Transformation</h2>
+      <div class="construction-box">
+        <h3 data-translate="under-construction">🚧 Em Construção</h3>
+        <p><strong data-translate="coming-soon">Em breve disponível aqui no site.</strong></p>
+      </div>
+    </div>
+
+    <!-- Botões para abrir as janelas modais -->
+         <div class="section">
+       <h2 data-translate="order-management-title">📋 Gerenciamento de Pedidos</h2>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+         <button onclick="openModal('statusModal')" class="modal-trigger-btn" style="background: linear-gradient(45deg, #ff4444, #cc0000);" data-translate="status-orders-btn">
+           📋 Status de Pedidos
+         </button>
+         <button onclick="openModal('infoModal')" class="modal-trigger-btn" style="background: linear-gradient(45deg, #00ffff, #0080ff);" data-translate="info-orders-btn">
+           📌 Informações de Encomendas
+         </button>
+         <button onclick="openModal('freeModal')" class="modal-trigger-btn" style="background: linear-gradient(45deg, #ffff00, #ffaa00);" data-translate="free-order-btn">
+           🎁 Pedido Gratuito
+         </button>
+         <button onclick="openModal('customModal')" class="modal-trigger-btn" style="background: linear-gradient(45deg, #ff00ff, #800080);" data-translate="custom-order-btn">
+           💰 Encomenda Personalizada
+         </button>
+       </div>
+       
+       <!-- Botão Admin (discreto) -->
+       <div style="text-align: center; margin-top: 30px;">
+         <button onclick="openAdminLogin()" style="background: transparent; border: 1px solid #333; color: #666; padding: 5px 10px; font-size: 10px; cursor: pointer; border-radius: 5px;">
+           🔧 Admin
+         </button>
+       </div>
+     </div>
+
+    <div class="section">
+      <h2 data-translate="feedback-title">💬 Feedback sobre Conteúdo</h2>
+      <p data-translate="feedback-description">Gostaria de dar sua opinião sobre o conteúdo que pediu ou recebeu? Seu feedback é muito importante para mim!</p>
+      <form id="feedback-form" onsubmit="handleFeedbackSubmit(event)">
+        <label for="feedback-nome" data-translate="feedback-name">Seu nome</label>
+        <input type="text" id="feedback-nome" name="nome" required data-translate="feedback-name-placeholder" placeholder="Como posso te chamar?">
+
+        <label for="feedback-mensagem" data-translate="feedback-message">Seu feedback sobre o conteúdo</label>
+        <textarea id="feedback-mensagem" name="mensagem" rows="4" required data-translate="feedback-message-placeholder" placeholder="Conte o que você achou do conteúdo que pediu/recebeu, se gostou, sugestões de melhorias..."></textarea>
+
+        <button type="submit" data-translate="send-feedback">Enviar Feedback</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2 data-translate="saved-feedbacks-title">📝 Feedbacks Salvos</h2>
+      <div id="feedbacks-container">
+        <p style="text-align: center; color: #ffffff; opacity: 0.7;" data-translate="no-feedbacks">Nenhum feedback ainda. Seja o primeiro!</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 data-translate="contact">📞 Contato</h2>
+      <div class="contact-info">
+        <p>📧 Email: <a href="mailto:teris.ofc777@gmail.com">teris.ofc777@gmail.com</a> — <span data-translate="email-info">caso tenha dúvidas ou precise falar diretamente comigo.</span></p>
+        <p>📱 Amino: teris_777 — <span data-translate="amino-info">também pode me encontrar por lá.</span></p>
+        <p>🎥 YouTube: <a href="https://youtube.com/@teris_ofc_777" target="_blank">@teris_ofc_777</a></p>
+      </div>
+    </div>
+  </div>
+
+     <!-- Modal de Agradecimento -->
+   <div id="thankYouModal" class="modal" style="display: none;">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h2 data-translate="order-received">🎉 Pedido Recebido!</h2>
+       </div>
+       <div class="modal-body">
+         <p><strong data-translate="thank-you-form">Obrigado pelo seu formulário!</strong></p>
+         <p data-translate="order-analysis">✅ Seu pedido está em análise e estará pronto em breve.</p>
+         <p data-translate="email-confirmation">📧 Você receberá uma confirmação por e-mail.</p>
+         <p data-translate="contact-more-info">📞 Entre em contato para mais informações:</p>
+         <ul>
+           <li>📧 Email: <a href="mailto:teris.ofc777@gmail.com">teris.ofc777@gmail.com</a></li>
+           <li>📱 Amino: teris_777</li>
+           <li>🎥 YouTube: <a href="https://youtube.com/@teris_ofc_777" target="_blank">@teris_ofc_777</a></li>
+         </ul>
+       </div>
+       <div class="modal-footer">
+         <button onclick="closeThankYouModal()" class="modal-button" data-translate="close">Fechar</button>
+       </div>
+     </div>
+   </div>
+
+   <!-- Modal Status de Pedidos -->
+   <div id="statusModal" class="order-modal">
+     <div class="order-modal-content">
+       <div class="order-modal-header">
+         <h2>📋 Status de Pedidos</h2>
+       </div>
+       <div class="order-modal-body">
+         <div class="status-box">
+           <h3>⚠️ Pedidos Temporariamente Suspensos</h3>
+           <p><strong>No momento não estou aceitando pedidos.</strong></p>
+           <p>📌 Sempre verifique este site para saber quando estarei disponível novamente. No momento, estou focando no conteúdo dos PDFs e questões pessoais.</p>
+         </div>
+       </div>
+       <div class="order-modal-footer">
+         <button onclick="closeModal('statusModal')" class="order-modal-button">Fechar</button>
+       </div>
+     </div>
+   </div>
+
+   <!-- Modal Informações de Encomendas -->
+   <div id="infoModal" class="order-modal">
+     <div class="order-modal-content">
+       <div class="order-modal-header">
+         <h2>📌 Informações de Encomendas – Subliminares Teris</h2>
+       </div>
+       <div class="order-modal-body">
+         <p>Você pode solicitar um ou vários subliminar personalizado com boosters energéticos, proteção e, se desejar, magia embutida.</p>
+         <p><strong>Confira os pacotes disponíveis:</strong></p>
+         
+         <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #00ffff;">
+           <h3 style="color: #00ffff; margin-bottom: 15px;">🔹 Pacote Básico – R$20</h3>
+           <ul style="color: #ffffff; margin-left: 20px;">
+             <li>Até 100 afirmações</li>
+             <li>Booster energético leve (sem magia)</li>
+             <li>Proteção vibracional simples</li>
+             <li>Edição básica</li>
+             <li>Música à sua escolha ou deixe comigo</li>
+           </ul>
+         </div>
+         
+         <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #ffff00;">
+           <h3 style="color: #ffff00; margin-bottom: 15px;">🔸 Pacote Intermediário – R$30</h3>
+           <ul style="color: #ffffff; margin-left: 20px;">
+             <li>Até 200 afirmações</li>
+             <li>Booster energético forte (sem magia)</li>
+             <li>Proteção energética reforçada</li>
+             <li>Frequência vibracional opcional (ex: 432Hz, 528Hz)</li>
+             <li>Edição mais equilibrada</li>
+             <li>Música personalizada conforme o tema</li>
+           </ul>
+         </div>
+         
+         <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #ff00ff;">
+           <h3 style="color: #ff00ff; margin-bottom: 15px;">🔮 Pacote Mágico – R$77</h3>
+           <ul style="color: #ffffff; margin-left: 20px;">
+             <li>Até 300 afirmações</li>
+             <li>Booster mágico com magia</li>
+             <li>Proteção com selamento mágico</li>
+             <li>Frequência oculta espiritual</li>
+             <li>Criado em estado de transe</li>
+             <li>Edição completa com camadas mágicas</li>
+             <li>Música à sua escolha ou canalizada</li>
+           </ul>
+         </div>
+         
+         <div style="background-color: #1a1a1a; border-radius: 8px; padding: 20px; margin: 20px 0; border: 2px solid #00ff00;">
+           <h3 style="color: #00ff00; margin-bottom: 15px;">📤 Como fazer seu pedido:</h3>
+           <p style="color: #ffffff;">Após escolher o pacote, vá até a seção "Encomenda Personalizada" e envie:</p>
+           <ul style="color: #ffffff; margin-left: 20px;">
+             <li>O que deseja manifestar ou transformar</li>
+             <li>Tipo de música (ou deixe comigo)</li>
+             <li>Nome desejado no título (opcional)</li>
+           </ul>
+           <p style="color: #00ff00; font-weight: bold; margin-top: 15px;">> O pagamento pode ser feito antes ou depois da entrega como sentir.</p>
+           <p style="color: #ffffff;">Assim que estiver pronto, você receberá o acesso ao áudio e às afirmações.</p>
+         </div>
+         
+         <div style="background-color: #1a1a1a; border-radius: 8px; padding: 20px; margin: 20px 0; border: 2px solid #ffaa00;">
+           <h3 style="color: #ffaa00; margin-bottom: 15px;">⏱ Prazo de entrega:</h3>
+           <ul style="color: #ffffff; margin-left: 20px;">
+             <li>Até 2 a 4 dias úteis (em caso de muitos pedidos) após o pagamento</li>
+             <li>Se já estiver pronto, envio no mesmo dia</li>
+           </ul>
+         </div>
+       </div>
+       <div class="order-modal-footer">
+         <button onclick="closeModal('infoModal')" class="order-modal-button">Fechar</button>
+       </div>
+     </div>
+   </div>
+
+   <!-- Modal Pedido Gratuito -->
+   <div id="freeModal" class="order-modal">
+     <div class="order-modal-content">
+       <div class="order-modal-header">
+         <h2>🎁 Pedido Gratuito</h2>
+       </div>
+       <div class="order-modal-body">
+         <p>Use este formulário para enviar um pedido simples (gratuito).</p>
+         <p><em>⚠️ <strong>IMPORTANTE:</strong> <span>No momento não posso fazer pedidos gratuitos. Este formulário está temporariamente desabilitado.</span></em></p>
+         <form action="https://formspree.io/f/xovldbao" method="POST" style="opacity: 0.5; pointer-events: none;">
+           <label for="nome-pedido">Seu nome</label>
+           <input type="text" id="nome-pedido" name="nome" required disabled>
+
+           <label for="email-pedido">Seu e-mail</label>
+           <input type="email" id="email-pedido" name="email" required disabled>
+
+           <label for="mensagem-pedido">Seu pedido (inclua onde deseja receber)</label>
+           <textarea id="mensagem-pedido" name="mensagem" rows="4" required disabled></textarea>
+
+           <button type="submit" disabled>Formulário Temporariamente Desabilitado</button>
+         </form>
+       </div>
+       <div class="order-modal-footer">
+         <button onclick="closeModal('freeModal')" class="order-modal-button">Fechar</button>
+       </div>
+     </div>
+   </div>
+
+       <!-- Modal Encomenda Personalizada -->
+    <div id="customModal" class="order-modal">
+      <div class="order-modal-content">
+        <div class="order-modal-header">
+          <h2>💰 Encomenda Personalizada</h2>
+        </div>
+        <div class="order-modal-body">
+          <p data-translate="payment-info">Após enviar sua solicitação, você receberá a chave Pix por email para realizar o pagamento. O pedido só será processado após a confirmação do pagamento.</p>
+          <p data-translate="use-form-custom">Use este formulário para solicitar uma encomenda feita do zero.</p>
+          <p><em>⚠️ <strong data-translate="important">IMPORTANTE:</strong> <span data-translate="receive-info">Informe na descrição como deseja receber (Email, Drive ou YouTube).</span></em></p>
+          <form id="encomenda-form" action="https://formspree.io/f/xovldbao" method="POST" onsubmit="handleFormSubmit(event)">
+            <label for="nome-encomenda" data-translate="your-name">Seu nome</label>
+            <input type="text" id="nome-encomenda" name="nome" required>
+
+            <label for="email-encomenda" data-translate="your-email">Seu e-mail</label>
+            <input type="email" id="email-encomenda" name="email" required>
+
+            <label for="mensagem-encomenda" data-translate="order-details">Detalhes da encomenda (inclua onde deseja receber)</label>
+            <textarea id="mensagem-encomenda" name="mensagem" rows="4" required></textarea>
+
+            <button type="submit" data-translate="request-order">Solicitar Encomenda</button>
+          </form>
+          
+          <div style="text-align: center; margin-top: 20px; padding: 15px; background-color: #1a1a1a; border-radius: 8px; border: 2px solid #ffffff;">
+            <h3 style="color: #ffffff; margin-bottom: 10px;" data-translate="pix-key-title">💳 Chave Pix para Pagamento</h3>
+            <p style="color: #ffffff; font-size: 16px; margin-bottom: 5px;"><strong>Email:</strong></p>
+            <p style="color: #00ffff; font-size: 18px; font-weight: bold; margin: 0;" data-translate="pix-key-email">teris.ofc777@gmail.com</p>
+            <p style="color: #ffffff; font-size: 14px; margin-top: 10px; opacity: 0.8;">Use este email como chave Pix para realizar o pagamento</p>
+          </div>
+        </div>
+        <div class="order-modal-footer">
+          <button onclick="closeModal('customModal')" class="order-modal-button">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Login Admin -->
+    <div id="adminLoginModal" class="order-modal">
+      <div class="order-modal-content">
+        <div class="order-modal-header">
+          <h2 data-translate="admin-access">🔐 Acesso Administrativo</h2>
+        </div>
+        <div class="order-modal-body">
+          <p data-translate="admin-password">Digite a senha de administrador:</p>
+                     <input type="password" id="adminPassword" data-translate="admin-password-placeholder" placeholder="Senha de admin" style="margin-bottom: 20px;" onkeypress="if(event.key==='Enter') loginAdmin();">
+          <div style="display: flex; gap: 10px;">
+            <button onclick="loginAdmin()" class="order-modal-button" data-translate="admin-enter">Entrar</button>
+            <button onclick="closeModal('adminLoginModal')" class="order-modal-button" style="background: #666;" data-translate="admin-cancel">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Painel Admin -->
+    <div id="adminPanelModal" class="order-modal">
+      <div class="order-modal-content">
+        <div class="order-modal-header">
+          <h2 data-translate="admin-panel">⚙️ Painel Administrativo</h2>
+        </div>
+        <div class="order-modal-body">
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #00ffff; margin-bottom: 15px;" data-translate="current-status">📊 Status Atual</h3>
+            <p><strong data-translate="free-orders">Pedidos Gratuitos:</strong> <span id="freeStatus" style="color: #ff4444;" data-translate="disabled">❌ Desabilitado</span></p>
+            <p><strong data-translate="custom-orders">Pedidos Personalizados:</strong> <span id="customStatus" style="color: #ff4444;" data-translate="disabled">❌ Desabilitado</span></p>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;" data-translate="controls">🎛️ Controles</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+              <button onclick="toggleFreeOrders()" id="toggleFreeBtn" class="order-modal-button" style="background: #ff4444;" data-translate="disable-free-orders">Desabilitar Pedidos Gratuitos</button>
+              <button onclick="toggleCustomOrders()" id="toggleCustomBtn" class="order-modal-button" style="background: #ff4444;" data-translate="disable-custom-orders">Desabilitar Pedidos Personalizados</button>
+            </div>
+            <button onclick="enableAllOrders()" class="order-modal-button" style="background: #00ff00; color: #000;" data-translate="enable-all-orders">✅ Ativar Todos os Pedidos</button>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffff00; margin-bottom: 15px;" data-translate="status-message">📝 Mensagem de Status</h3>
+            <textarea id="statusMessage" rows="3" data-translate="status-message-placeholder" placeholder="Digite uma mensagem personalizada para o status de pedidos..." style="margin-bottom: 10px;"></textarea>
+            <button onclick="updateStatusMessage()" class="order-modal-button" data-translate="update-message">Atualizar Mensagem</button>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: #ff00ff; margin-bottom: 15px;">💰 Gerenciar Preços</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+              <div>
+                <label style="color: #ffffff; font-size: 12px;">Pacote Básico (R$)</label>
+                <input type="number" id="precoBasico" placeholder="20" style="margin-bottom: 5px;">
+              </div>
+              <div>
+                <label style="color: #ffffff; font-size: 12px;">Pacote Intermediário (R$)</label>
+                <input type="number" id="precoIntermediario" placeholder="30" style="margin-bottom: 5px;">
+              </div>
+              <div>
+                <label style="color: #ffffff; font-size: 12px;">Pacote Mágico (R$)</label>
+                <input type="number" id="precoMagico" placeholder="77" style="margin-bottom: 5px;">
+              </div>
+              <div>
+                <label style="color: #ffffff; font-size: 12px;">Prazo de Entrega (dias)</label>
+                <input type="number" id="prazoEntrega" placeholder="4" style="margin-bottom: 5px;">
+              </div>
+            </div>
+            <button onclick="updatePrices()" class="order-modal-button">Atualizar Preços</button>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: #00ffff; margin-bottom: 15px;">📧 Gerenciar Contato</h3>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Email de Contato</label>
+              <input type="email" id="emailContato" placeholder="teris.ofc777@gmail.com" style="margin-bottom: 10px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Chave Pix (Email)</label>
+              <input type="email" id="pixKey" placeholder="teris.ofc777@gmail.com" style="margin-bottom: 10px;">
+            </div>
+            <button onclick="updateContact()" class="order-modal-button">Atualizar Contato</button>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: #ffaa00; margin-bottom: 15px;">🗑️ Gerenciar Feedbacks</h3>
+            <p style="color: #ffffff; font-size: 12px; margin-bottom: 15px;">Feedbacks salvos: <span id="feedbackCount">0</span></p>
+            <button onclick="clearAllFeedbacks()" class="order-modal-button" style="background: #ff4444;">Limpar Todos os Feedbacks</button>
+            <button onclick="exportFeedbacks()" class="order-modal-button" style="background: #00aa00;">Exportar Feedbacks</button>
+            <button onclick="exportAllSiteData()" class="order-modal-button" style="background: #9370db;">💾 Backup Completo</button>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: #ff69b4; margin-bottom: 15px;">📄 Gerenciar PDFs</h3>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Título do PDF</label>
+              <input type="text" id="pdfTitle" placeholder="Ex: Manual Teris (Português)" style="margin-bottom: 10px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Link do PDF</label>
+              <input type="url" id="pdfLink" placeholder="https://drive.google.com/file/d/..." style="margin-bottom: 10px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Idioma</label>
+              <select id="pdfLanguage" style="margin-bottom: 10px;">
+                <option value="pt">Português</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Categoria</label>
+              <select id="pdfCategory" style="margin-bottom: 10px;">
+                <option value="manual">Manual</option>
+                <option value="guide">Guia</option>
+                <option value="tutorial">Tutorial</option>
+                <option value="other">Outro</option>
+              </select>
+            </div>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+              <button onclick="addPDF()" class="order-modal-button" style="background: #00ff00; color: #000;">➕ Adicionar PDF</button>
+              <button onclick="updatePDF()" class="order-modal-button" style="background: #00aaff;">✏️ Atualizar PDF</button>
+            </div>
+            <div style="margin-top: 15px;">
+              <h4 style="color: #ffffff; font-size: 14px; margin-bottom: 10px;">📚 PDFs Atuais:</h4>
+              <div id="pdfsList" style="max-height: 200px; overflow-y: auto; background-color: #333; border-radius: 5px; padding: 10px;">
+                <!-- Lista de PDFs será carregada aqui -->
+              </div>
+            </div>
+          </div>
+          
+          <div style="background-color: #222222; border-radius: 8px; padding: 20px; margin-top: 20px;">
+            <h3 style="color: #9370db; margin-bottom: 15px;">🎨 Personalizar Site</h3>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Título Principal do Site</label>
+              <input type="text" id="siteTitle" placeholder="Teris | Subliminares" style="margin-bottom: 10px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Mensagem de Boas-vindas</label>
+              <textarea id="welcomeMessage" rows="3" placeholder="Digite uma mensagem de boas-vindas personalizada..." style="margin-bottom: 10px;"></textarea>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="color: #ffffff; font-size: 12px;">Cor Principal (hex)</label>
+              <input type="text" id="primaryColor" placeholder="#00ffff" style="margin-bottom: 10px;">
+            </div>
+            <button onclick="updateSiteCustomization()" class="order-modal-button">💫 Aplicar Personalizações</button>
+          </div>
+        </div>
+        <div class="order-modal-footer">
+          <button onclick="closeModal('adminPanelModal')" class="order-modal-button">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+  <script>
+    // Sistema de Tradução
+    const translations = {
+      pt: {
+        // Títulos
+        'title': 'Canal Teris',
+        'visit-channel': 'Visite meu canal no YouTube',
+        'welcome-title': '🌟 Bem-vindo ao Canal Teris!',
+        'welcome-description': 'Aqui você encontrará subliminares personalizados, manuais exclusivos e muito mais para sua transformação pessoal.',
+        'video-schedule-title': '📅 Cronograma de Vídeos',
+        'video-schedule-description': 'O número máximo de vídeos por vez é de 2 a 3. Em ocasiões especiais, podem ser liberados até 5 vídeos.',
+        'manuals-title': '📚 Manuais PDF',
+        'manual-pt': 'Manual Teris (Português)',
+        'manual-en': 'Manual Teris (English)',
+        'transformation-guide': '🔧 Guia Transformation',
+        'under-construction': '🚧 Em Construção',
+        'coming-soon': 'Em breve disponível aqui no site.',
+        'order-management-title': '📋 Gerenciamento de Pedidos',
+        'status-orders-btn': '📋 Status de Pedidos',
+        'info-orders-btn': '📌 Informações de Encomendas',
+        'free-order-btn': '🎁 Pedido Gratuito',
+        'custom-order-btn': '💰 Encomenda Personalizada',
+        'orders-status': '📋 Status de Pedidos',
+        'orders-suspended': '⚠️ Pedidos Temporariamente Suspensos',
+        'not-accepting': 'No momento não estou aceitando pedidos.',
+        'check-site': '📌 Sempre verifique este site para saber quando estarei disponível novamente. No momento, estou focando no conteúdo dos PDFs e questões pessoais.',
+        'free-order': '🎁 Pedido Gratuito',
+        'use-form-free': 'Use este formulário para enviar um pedido simples (gratuito).',
+        'important': 'IMPORTANTE:',
+        'free-disabled': 'No momento não posso fazer pedidos gratuitos. Este formulário está temporariamente desabilitado.',
+        'your-name': 'Seu nome',
+        'your-email': 'Seu e-mail',
+        'your-order': 'Seu pedido (inclua onde deseja receber)',
+        'form-disabled': 'Formulário Temporariamente Desabilitado',
+        'custom-order': '💰 Encomenda Personalizada',
+        'price': 'Valor: R$10',
+        'payment-info': 'Após enviar sua solicitação, você receberá a chave Pix por email para realizar o pagamento. O pedido só será processado após a confirmação do pagamento.',
+        'use-form-custom': 'Use este formulário para solicitar uma encomenda feita do zero.',
+        'receive-info': 'Informe na descrição como deseja receber (Email, Drive ou YouTube).',
+        'order-details': 'Detalhes da encomenda (inclua onde deseja receber)',
+        'request-order': 'Solicitar Encomenda',
+        'contact': '📞 Contato',
+        'email-info': 'caso tenha dúvidas ou precise falar diretamente comigo.',
+        'amino-info': 'também pode me encontrar por lá.',
+        'feedback-title': '💬 Feedback sobre Conteúdo',
+        'feedback-description': 'Gostaria de dar sua opinião sobre o conteúdo que pediu ou recebeu? Seu feedback é muito importante para mim!',
+        'feedback-name': 'Seu nome',
+        'feedback-name-placeholder': 'Como posso te chamar?',
+        'feedback-message': 'Seu feedback sobre o conteúdo',
+        'feedback-message-placeholder': 'Conte o que você achou do conteúdo que pediu/recebeu, se gostou, sugestões de melhorias...',
+        'send-feedback': 'Enviar Feedback',
+        'saved-feedbacks-title': '📝 Feedbacks Salvos',
+        'no-feedbacks': 'Nenhum feedback ainda. Seja o primeiro!',
+        'pix-key-title': '💳 Chave Pix para Pagamento',
+        'pix-key-email': 'teris.ofc777@gmail.com',
+        // Admin Panel
+        'admin-access': '🔐 Acesso Administrativo',
+        'admin-password': 'Digite a senha de administrador:',
+        'admin-password-placeholder': 'Senha de admin',
+        'admin-enter': 'Entrar',
+        'admin-cancel': 'Cancelar',
+        'admin-panel': '⚙️ Painel Administrativo',
+        'current-status': '📊 Status Atual',
+        'free-orders': 'Pedidos Gratuitos:',
+        'custom-orders': 'Pedidos Personalizados:',
+        'disabled': '❌ Desabilitado',
+        'enabled': '✅ Habilitado',
+        'controls': '🎛️ Controles',
+        'disable-free-orders': 'Desabilitar Pedidos Gratuitos',
+        'enable-free-orders': 'Habilitar Pedidos Gratuitos',
+        'disable-custom-orders': 'Desabilitar Pedidos Personalizados',
+        'enable-custom-orders': 'Habilitar Pedidos Personalizados',
+        'enable-all-orders': '✅ Ativar Todos os Pedidos',
+        'status-message': '📝 Mensagem de Status',
+        'status-message-placeholder': 'Digite uma mensagem personalizada para o status de pedidos...',
+        'update-message': 'Atualizar Mensagem',
+        // Modal
+        'order-received': '🎉 Pedido Recebido!',
+        'thank-you-form': 'Obrigado pelo seu formulário!',
+        'order-analysis': '✅ Seu pedido está em análise e estará pronto em breve.',
+        'email-confirmation': '📧 Você receberá uma confirmação por e-mail.',
+        'contact-more-info': '📞 Entre em contato para mais informações:',
+        'close': 'Fechar'
+      },
+      en: {
+        // Titles
+        'title': 'Teris Channel',
+        'visit-channel': 'Visit my YouTube channel',
+        'welcome-title': '🌟 Welcome to Teris Channel!',
+        'welcome-description': 'Here you will find personalized subliminals, exclusive manuals and much more for your personal transformation.',
+        'video-schedule-title': '📅 Video Schedule',
+        'video-schedule-description': 'The maximum number of videos at a time is 2 to 3. On special occasions, up to 5 videos may be released.',
+        'manuals-title': '📚 PDF Manuals',
+        'manual-pt': 'Teris Manual (Portuguese)',
+        'manual-en': 'Teris Manual (English)',
+        'transformation-guide': '🔧 Transformation Guide',
+        'under-construction': '🚧 Under Construction',
+        'coming-soon': 'Coming soon to this site.',
+        'order-management-title': '📋 Order Management',
+        'status-orders-btn': '📋 Order Status',
+        'info-orders-btn': '📌 Order Information',
+        'free-order-btn': '🎁 Free Order',
+        'custom-order-btn': '💰 Custom Order',
+        'orders-status': '📋 Order Status',
+        'orders-suspended': '⚠️ Orders Temporarily Suspended',
+        'not-accepting': 'I am not accepting orders at the moment.',
+        'check-site': '📌 Always check this site to know when I will be available again. Currently, I am focusing on PDF content and personal matters.',
+        'free-order': '🎁 Free Order',
+        'use-form-free': 'Use this form to send a simple (free) order.',
+        'important': 'IMPORTANT:',
+        'free-disabled': 'I cannot make free orders at the moment. This form is temporarily disabled.',
+        'your-name': 'Your name',
+        'your-email': 'Your email',
+        'your-order': 'Your order (include where you want to receive)',
+        'form-disabled': 'Form Temporarily Disabled',
+        'custom-order': '💰 Custom Order',
+        'price': 'Price: R$10',
+        'payment-info': 'After submitting your request, you will receive the Pix key by email to make the payment. The order will only be processed after payment confirmation.',
+        'use-form-custom': 'Use this form to request a custom order from scratch.',
+        'receive-info': 'Include in the description how you want to receive (Email, Drive or YouTube).',
+        'order-details': 'Order details (include where you want to receive)',
+        'request-order': 'Request Order',
+        'contact': '📞 Contact',
+        'email-info': 'if you have questions or need to speak directly with me.',
+        'amino-info': 'you can also find me there.',
+        'feedback-title': '💬 Content Feedback',
+        'feedback-description': 'Would you like to give your opinion about the content you requested or received? Your feedback is very important to me!',
+        'feedback-name': 'Your name',
+        'feedback-name-placeholder': 'How can I call you?',
+        'feedback-message': 'Your feedback about the content',
+        'feedback-message-placeholder': 'Tell us what you thought about the content you requested/received, if you liked it, suggestions for improvements...',
+        'send-feedback': 'Send Feedback',
+        'saved-feedbacks-title': '📝 Saved Feedbacks',
+        'no-feedbacks': 'No feedback yet. Be the first!',
+        'pix-key-title': '💳 Pix Key for Payment',
+        'pix-key-email': 'teris.ofc777@gmail.com',
+        // Admin Panel
+        'admin-access': '🔐 Administrative Access',
+        'admin-password': 'Enter administrator password:',
+        'admin-password-placeholder': 'Admin password',
+        'admin-enter': 'Enter',
+        'admin-cancel': 'Cancel',
+        'admin-panel': '⚙️ Administrative Panel',
+        'current-status': '📊 Current Status',
+        'free-orders': 'Free Orders:',
+        'custom-orders': 'Custom Orders:',
+        'disabled': '❌ Disabled',
+        'enabled': '✅ Enabled',
+        'controls': '🎛️ Controls',
+        'disable-free-orders': 'Disable Free Orders',
+        'enable-free-orders': 'Enable Free Orders',
+        'disable-custom-orders': 'Disable Custom Orders',
+        'enable-custom-orders': 'Enable Custom Orders',
+        'enable-all-orders': '✅ Enable All Orders',
+        'status-message': '📝 Status Message',
+        'status-message-placeholder': 'Type a custom message for order status...',
+        'update-message': 'Update Message',
+        // Modal
+        'order-received': '🎉 Order Received!',
+        'thank-you-form': 'Thank you for your form!',
+        'order-analysis': '✅ Your order is under analysis and will be ready soon.',
+        'email-confirmation': '📧 You will receive an email confirmation.',
+        'contact-more-info': '📞 Contact for more information:',
+        'close': 'Close'
+      },
+      es: {
+        // Títulos
+        'title': 'Canal Teris',
+        'visit-channel': 'Visita mi canal de YouTube',
+        'welcome-title': '🌟 ¡Bienvenido al Canal Teris!',
+        'welcome-description': 'Aquí encontrarás subliminales personalizados, manuales exclusivos y mucho más para tu transformación personal.',
+        'video-schedule-title': '📅 Cronograma de Videos',
+        'video-schedule-description': 'El número máximo de videos a la vez es de 2 a 3. En ocasiones especiales, pueden ser liberados hasta 5 videos.',
+        'manuals-title': '📚 Manuales PDF',
+        'manual-pt': 'Manual Teris (Portugués)',
+        'manual-en': 'Manual Teris (Inglés)',
+        'transformation-guide': '🔧 Guía de Transformación',
+        'under-construction': '🚧 En Construcción',
+        'coming-soon': 'Próximamente disponible en este sitio.',
+        'order-management-title': '📋 Gestión de Pedidos',
+        'status-orders-btn': '📋 Estado de Pedidos',
+        'info-orders-btn': '📌 Información de Pedidos',
+        'free-order-btn': '🎁 Pedido Gratuito',
+        'custom-order-btn': '💰 Pedido Personalizado',
+        'orders-status': '📋 Estado de Pedidos',
+        'orders-suspended': '⚠️ Pedidos Temporalmente Suspendidos',
+        'not-accepting': 'No estoy aceptando pedidos en este momento.',
+        'check-site': '📌 Siempre verifica este sitio para saber cuándo estaré disponible nuevamente. Actualmente, me estoy enfocando en el contenido de PDF y asuntos personales.',
+        'free-order': '🎁 Pedido Gratuito',
+        'use-form-free': 'Usa este formulario para enviar un pedido simple (gratuito).',
+        'important': 'IMPORTANTE:',
+        'free-disabled': 'No puedo hacer pedidos gratuitos en este momento. Este formulario está temporalmente deshabilitado.',
+        'your-name': 'Tu nombre',
+        'your-email': 'Tu correo electrónico',
+        'your-order': 'Tu pedido (incluye dónde quieres recibir)',
+        'form-disabled': 'Formulario Temporalmente Deshabilitado',
+        'custom-order': '💰 Pedido Personalizado',
+        'price': 'Precio: R$10',
+        'payment-info': 'Después de enviar tu solicitud, recibirás la clave Pix por correo para realizar el pago. El pedido solo será procesado después de la confirmación del pago.',
+        'use-form-custom': 'Usa este formulario para solicitar un pedido personalizado desde cero.',
+        'receive-info': 'Incluye en la descripción cómo quieres recibir (Email, Drive o YouTube).',
+        'order-details': 'Detalles del pedido (incluye dónde quieres recibir)',
+        'request-order': 'Solicitar Pedido',
+        'contact': '📞 Contacto',
+        'email-info': 'si tienes dudas o necesitas hablar directamente conmigo.',
+        'amino-info': 'también puedes encontrarme allí.',
+        'feedback-title': '💬 Feedback sobre Contenido',
+        'feedback-description': '¿Te gustaría dar tu opinión sobre el contenido que pediste o recibiste? ¡Tu feedback es muy importante para mí!',
+        'feedback-name': 'Tu nombre',
+        'feedback-name-placeholder': '¿Cómo puedo llamarte?',
+        'feedback-message': 'Tu feedback sobre el contenido',
+        'feedback-message-placeholder': 'Cuéntanos qué pensaste sobre el contenido que pediste/re recibiste, si te gustó, sugerencias de mejoras...',
+        'send-feedback': 'Enviar Feedback',
+        'saved-feedbacks-title': '📝 Feedbacks Guardados',
+        'no-feedbacks': 'Aún no hay feedback. ¡Sé el primero!',
+        'pix-key-title': '💳 Clave Pix para Pago',
+        'pix-key-email': 'teris.ofc777@gmail.com',
+        // Admin Panel
+        'admin-access': '🔐 Acceso Administrativo',
+        'admin-password': 'Ingrese la contraseña de administrador:',
+        'admin-password-placeholder': 'Contraseña de admin',
+        'admin-enter': 'Entrar',
+        'admin-cancel': 'Cancelar',
+        'admin-panel': '⚙️ Panel Administrativo',
+        'current-status': '📊 Estado Actual',
+        'free-orders': 'Pedidos Gratuitos:',
+        'custom-orders': 'Pedidos Personalizados:',
+        'disabled': '❌ Deshabilitado',
+        'enabled': '✅ Habilitado',
+        'controls': '🎛️ Controles',
+        'disable-free-orders': 'Deshabilitar Pedidos Gratuitos',
+        'enable-free-orders': 'Habilitar Pedidos Gratuitos',
+        'disable-custom-orders': 'Deshabilitar Pedidos Personalizados',
+        'enable-custom-orders': 'Habilitar Pedidos Personalizados',
+        'enable-all-orders': '✅ Activar Todos los Pedidos',
+        'status-message': '📝 Mensaje de Estado',
+        'status-message-placeholder': 'Escriba un mensaje personalizado para el estado de pedidos...',
+        'update-message': 'Actualizar Mensaje',
+        // Modal
+        'order-received': '🎉 ¡Pedido Recibido!',
+        'thank-you-form': '¡Gracias por tu formulario!',
+        'order-analysis': '✅ Tu pedido está en análisis y estará listo pronto.',
+        'email-confirmation': '📧 Recibirás una confirmación por correo.',
+        'contact-more-info': '📞 Contacta para más información:',
+        'close': 'Cerrar'
+      }
+    };
+
+    // Função para mudar idioma
+    function changeLanguage(lang) {
+      const elements = document.querySelectorAll('[data-translate]');
+      
+      elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+          // Se for um input ou textarea, atualizar placeholder
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = translations[lang][key];
+          } else {
+            // Usar innerHTML para permitir formatação e quebras de linha
+            element.innerHTML = translations[lang][key];
+          }
+        }
+      });
+      
+      // Salvar preferência no localStorage
+      localStorage.setItem('selectedLanguage', lang);
+    }
+
+    // Carregar idioma salvo ou detectar idioma do navegador
+    function loadLanguage() {
+      const savedLang = localStorage.getItem('selectedLanguage');
+      const browserLang = navigator.language.split('-')[0];
+      
+      let lang = 'pt'; // Padrão
+      
+      if (savedLang) {
+        lang = savedLang;
+      } else if (browserLang === 'en') {
+        lang = 'en';
+      } else if (browserLang === 'es') {
+        lang = 'es';
+      }
+      
+      // Definir o valor do select
+      document.getElementById('language-select').value = lang;
+      
+      // Aplicar tradução
+      changeLanguage(lang);
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      // Verificar se o formulário está preenchido
+      const form = event.target;
+      const nome = form.querySelector('#nome-encomenda').value.trim();
+      const email = form.querySelector('#email-encomenda').value.trim();
+      const mensagem = form.querySelector('#mensagem-encomenda').value.trim();
+      
+      if (!nome || !email || !mensagem) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+      
+      // Enviar formulário imediatamente
+      form.submit();
+      
+      // Mostrar modal de agradecimento após um pequeno delay
+      setTimeout(() => {
+        showThankYouModal();
+      }, 500);
+    }
+
+    function showThankYouModal() {
+      document.getElementById('thankYouModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeThankYouModal() {
+      document.getElementById('thankYouModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+         // Fechar modal ao clicar fora dele
+     window.onclick = function(event) {
+       const modal = document.getElementById('thankYouModal');
+       if (event.target === modal) {
+         closeThankYouModal();
+       }
+       
+       // Fechar modais de pedidos ao clicar fora
+       const orderModals = document.querySelectorAll('.order-modal');
+       orderModals.forEach(modal => {
+         if (event.target === modal) {
+           closeModal(modal.id);
+         }
+       });
+     }
+
+           // Funções para controlar os modais de pedidos
+      function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Sistema de Administração
+      const ADMIN_PASSWORD = 'MariaIsabel112233445566';
+      
+      function openAdminLogin() {
+        openModal('adminLoginModal');
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+      }
+
+      function loginAdmin() {
+        const password = document.getElementById('adminPassword').value;
+        
+        if (password === ADMIN_PASSWORD) {
+          closeModal('adminLoginModal');
+          openModal('adminPanelModal');
+          updateAdminPanel();
+        } else {
+          alert('❌ Senha incorreta!');
+          document.getElementById('adminPassword').value = '';
+        }
+      }
+
+      function updateAdminPanel() {
+        const freeEnabled = localStorage.getItem('freeOrdersEnabled') === 'true';
+        const customEnabled = localStorage.getItem('customOrdersEnabled') === 'true';
+        const currentLang = localStorage.getItem('selectedLanguage') || 'pt';
+        
+        // Atualizar status
+        const enabledText = translations[currentLang]?.enabled || '✅ Habilitado';
+        const disabledText = translations[currentLang]?.disabled || '❌ Desabilitado';
+        
+        document.getElementById('freeStatus').textContent = freeEnabled ? enabledText : disabledText;
+        document.getElementById('freeStatus').style.color = freeEnabled ? '#00ff00' : '#ff4444';
+        
+        document.getElementById('customStatus').textContent = customEnabled ? enabledText : disabledText;
+        document.getElementById('customStatus').style.color = customEnabled ? '#00ff00' : '#ff4444';
+        
+        // Atualizar botões
+        const toggleFreeBtn = document.getElementById('toggleFreeBtn');
+        const toggleCustomBtn = document.getElementById('toggleCustomBtn');
+        
+        const disableFreeText = translations[currentLang]?.disableFreeOrders || 'Desabilitar Pedidos Gratuitos';
+        const enableFreeText = translations[currentLang]?.enableFreeOrders || 'Habilitar Pedidos Gratuitos';
+        const disableCustomText = translations[currentLang]?.disableCustomOrders || 'Desabilitar Pedidos Personalizados';
+        const enableCustomText = translations[currentLang]?.enableCustomOrders || 'Habilitar Pedidos Personalizados';
+        
+        toggleFreeBtn.textContent = freeEnabled ? disableFreeText : enableFreeText;
+        toggleFreeBtn.style.background = freeEnabled ? '#ff4444' : '#00ff00';
+        toggleFreeBtn.style.color = freeEnabled ? '#ffffff' : '#000000';
+        
+        toggleCustomBtn.textContent = customEnabled ? disableCustomText : enableCustomText;
+        toggleCustomBtn.style.background = customEnabled ? '#ff4444' : '#00ff00';
+        toggleCustomBtn.style.color = customEnabled ? '#ffffff' : '#000000';
+        
+        // Carregar mensagem de status
+        const statusMessage = localStorage.getItem('statusMessage') || '';
+        document.getElementById('statusMessage').value = statusMessage;
+        
+        // Carregar preços salvos
+        const precoBasico = localStorage.getItem('precoBasico') || '20';
+        const precoIntermediario = localStorage.getItem('precoIntermediario') || '30';
+        const precoMagico = localStorage.getItem('precoMagico') || '77';
+        const prazoEntrega = localStorage.getItem('prazoEntrega') || '4';
+        
+        document.getElementById('precoBasico').value = precoBasico;
+        document.getElementById('precoIntermediario').value = precoIntermediario;
+        document.getElementById('precoMagico').value = precoMagico;
+        document.getElementById('prazoEntrega').value = prazoEntrega;
+        
+        // Carregar informações de contato
+        const emailContato = localStorage.getItem('emailContato') || 'teris.ofc777@gmail.com';
+        const pixKey = localStorage.getItem('pixKey') || 'teris.ofc777@gmail.com';
+        
+        document.getElementById('emailContato').value = emailContato;
+        document.getElementById('pixKey').value = pixKey;
+        
+        // Atualizar contador de feedbacks
+        updateFeedbackCount();
+        
+        // Carregar lista de PDFs
+        displayPDFs();
+        
+        // Carregar personalizações do site
+        loadSiteCustomization();
+      }
+
+      function toggleFreeOrders() {
+        const currentStatus = localStorage.getItem('freeOrdersEnabled') === 'true';
+        localStorage.setItem('freeOrdersEnabled', (!currentStatus).toString());
+        updateAdminPanel();
+        updateOrderStatus();
+      }
+
+      function toggleCustomOrders() {
+        const currentStatus = localStorage.getItem('customOrdersEnabled') === 'true';
+        localStorage.setItem('customOrdersEnabled', (!currentStatus).toString());
+        updateAdminPanel();
+        updateOrderStatus();
+      }
+
+      function enableAllOrders() {
+        localStorage.setItem('freeOrdersEnabled', 'true');
+        localStorage.setItem('customOrdersEnabled', 'true');
+        updateAdminPanel();
+        updateOrderStatus();
+        alert('✅ Todos os pedidos foram ativados!');
+      }
+
+      function updateStatusMessage() {
+        const message = document.getElementById('statusMessage').value;
+        localStorage.setItem('statusMessage', message);
+        alert('✅ Mensagem de status atualizada!');
+      }
+
+      function updatePrices() {
+        const precoBasico = document.getElementById('precoBasico').value;
+        const precoIntermediario = document.getElementById('precoIntermediario').value;
+        const precoMagico = document.getElementById('precoMagico').value;
+        const prazoEntrega = document.getElementById('prazoEntrega').value;
+        
+        if (precoBasico) localStorage.setItem('precoBasico', precoBasico);
+        if (precoIntermediario) localStorage.setItem('precoIntermediario', precoIntermediario);
+        if (precoMagico) localStorage.setItem('precoMagico', precoMagico);
+        if (prazoEntrega) localStorage.setItem('prazoEntrega', prazoEntrega);
+        
+        alert('✅ Preços atualizados!');
+        updatePageContent();
+      }
+
+      function updateContact() {
+        const emailContato = document.getElementById('emailContato').value;
+        const pixKey = document.getElementById('pixKey').value;
+        
+        if (emailContato) localStorage.setItem('emailContato', emailContato);
+        if (pixKey) localStorage.setItem('pixKey', pixKey);
+        
+        alert('✅ Informações de contato atualizadas!');
+        updatePageContent();
+      }
+
+      function clearAllFeedbacks() {
+        if (confirm('⚠️ Tem certeza que deseja apagar TODOS os feedbacks? Esta ação não pode ser desfeita.')) {
+          localStorage.removeItem('feedbacks');
+          alert('✅ Todos os feedbacks foram removidos!');
+          updateFeedbackCount();
+        }
+      }
+
+      function exportFeedbacks() {
+        const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+        if (feedbacks.length === 0) {
+          alert('❌ Não há feedbacks para exportar.');
+          return;
+        }
+        
+        const dataStr = JSON.stringify(feedbacks, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `feedbacks_${new Date().toISOString().split('T')[0]}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+        alert('✅ Feedbacks exportados com sucesso!');
+      }
+
+      function updateFeedbackCount() {
+        const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+        const countElement = document.getElementById('feedbackCount');
+        if (countElement) {
+          countElement.textContent = feedbacks.length;
+        }
+      }
+
+      // Sistema de Gerenciamento de PDFs
+      function addPDF() {
+        const title = document.getElementById('pdfTitle').value.trim();
+        const link = document.getElementById('pdfLink').value.trim();
+        const language = document.getElementById('pdfLanguage').value;
+        const category = document.getElementById('pdfCategory').value;
+        
+        if (!title || !link) {
+          alert('❌ Por favor, preencha o título e o link do PDF.');
+          return;
+        }
+        
+        if (!link.startsWith('http')) {
+          alert('❌ O link deve começar com http:// ou https://');
+          return;
+        }
+        
+        const pdf = {
+          id: Date.now(),
+          title: title,
+          link: link,
+          language: language,
+          category: category,
+          dateAdded: new Date().toLocaleDateString('pt-BR')
+        };
+        
+        let pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+        pdfs.push(pdf);
+        localStorage.setItem('pdfs', JSON.stringify(pdfs));
+        
+        alert('✅ PDF adicionado com sucesso!');
+        displayPDFs();
+        clearPDFForm();
+      }
+      
+      function updatePDF() {
+        const title = document.getElementById('pdfTitle').value.trim();
+        const link = document.getElementById('pdfLink').value.trim();
+        const language = document.getElementById('pdfLanguage').value;
+        const category = document.getElementById('pdfCategory').value;
+        
+        if (!title || !link) {
+          alert('❌ Por favor, preencha o título e o link do PDF.');
+          return;
+        }
+        
+        const selectedPDF = localStorage.getItem('selectedPDF');
+        if (!selectedPDF) {
+          alert('❌ Selecione um PDF para atualizar.');
+          return;
+        }
+        
+        let pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+        const index = pdfs.findIndex(pdf => pdf.id == selectedPDF);
+        
+        if (index !== -1) {
+          pdfs[index] = {
+            ...pdfs[index],
+            title: title,
+            link: link,
+            language: language,
+            category: category,
+            dateUpdated: new Date().toLocaleDateString('pt-BR')
+          };
+          
+          localStorage.setItem('pdfs', JSON.stringify(pdfs));
+          alert('✅ PDF atualizado com sucesso!');
+          displayPDFs();
+          clearPDFForm();
+          localStorage.removeItem('selectedPDF');
+        }
+      }
+      
+      function deletePDF(pdfId) {
+        if (confirm('⚠️ Tem certeza que deseja apagar este PDF?')) {
+          let pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+          pdfs = pdfs.filter(pdf => pdf.id != pdfId);
+          localStorage.setItem('pdfs', JSON.stringify(pdfs));
+          displayPDFs();
+          alert('✅ PDF removido com sucesso!');
+        }
+      }
+      
+      function editPDF(pdfId) {
+        const pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+        const pdf = pdfs.find(p => p.id == pdfId);
+        
+        if (pdf) {
+          document.getElementById('pdfTitle').value = pdf.title;
+          document.getElementById('pdfLink').value = pdf.link;
+          document.getElementById('pdfLanguage').value = pdf.language;
+          document.getElementById('pdfCategory').value = pdf.category;
+          localStorage.setItem('selectedPDF', pdfId);
+        }
+      }
+      
+      function displayPDFs() {
+        const container = document.getElementById('pdfsList');
+        const pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+        
+        if (pdfs.length === 0) {
+          container.innerHTML = '<p style="color: #ffffff; opacity: 0.7; text-align: center;">Nenhum PDF adicionado ainda.</p>';
+          return;
+        }
+        
+        let html = '';
+        pdfs.forEach(pdf => {
+          const languageNames = { pt: 'Português', en: 'English', es: 'Español' };
+          const categoryNames = { manual: 'Manual', guide: 'Guia', tutorial: 'Tutorial', other: 'Outro' };
+          
+          html += `
+            <div style="background-color: #444; border-radius: 5px; padding: 10px; margin-bottom: 8px; border-left: 3px solid #ff69b4;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <h5 style="color: #ffffff; margin: 0; font-size: 14px;">${pdf.title}</h5>
+                <div style="display: flex; gap: 5px;">
+                  <button onclick="editPDF(${pdf.id})" style="background: #00aaff; color: #fff; border: none; padding: 2px 6px; border-radius: 3px; font-size: 10px; cursor: pointer;">✏️</button>
+                  <button onclick="deletePDF(${pdf.id})" style="background: #ff4444; color: #fff; border: none; padding: 2px 6px; border-radius: 3px; font-size: 10px; cursor: pointer;">🗑️</button>
+                </div>
+              </div>
+              <p style="color: #ffffff; font-size: 11px; margin: 2px 0; opacity: 0.8;">
+                🌐 ${languageNames[pdf.language]} | 📁 ${categoryNames[pdf.category]} | 📅 ${pdf.dateAdded}
+                ${pdf.dateUpdated ? ` | ✏️ Editado: ${pdf.dateUpdated}` : ''}
+              </p>
+              <a href="${pdf.link}" target="_blank" style="color: #ff69b4; font-size: 11px; text-decoration: none;">🔗 Ver PDF</a>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = html;
+      }
+      
+      function clearPDFForm() {
+        document.getElementById('pdfTitle').value = '';
+        document.getElementById('pdfLink').value = '';
+        document.getElementById('pdfLanguage').value = 'pt';
+        document.getElementById('pdfCategory').value = 'manual';
+      }
+      
+      // Sistema de Personalização do Site
+      function updateSiteCustomization() {
+        const siteTitle = document.getElementById('siteTitle').value.trim();
+        const welcomeMessage = document.getElementById('welcomeMessage').value.trim();
+        const primaryColor = document.getElementById('primaryColor').value.trim();
+        
+        if (siteTitle) {
+          localStorage.setItem('siteTitle', siteTitle);
+          document.title = siteTitle;
+        }
+        
+        if (welcomeMessage) {
+          localStorage.setItem('welcomeMessage', welcomeMessage);
+        }
+        
+        if (primaryColor && /^#[0-9A-F]{6}$/i.test(primaryColor)) {
+          localStorage.setItem('primaryColor', primaryColor);
+          applyCustomColors(primaryColor);
+        }
+        
+        alert('✅ Personalizações aplicadas com sucesso!');
+        updatePageContent();
+      }
+      
+      function applyCustomColors(color) {
+        const root = document.documentElement;
+        root.style.setProperty('--primary-color', color);
+        
+        // Aplicar cor aos elementos principais
+        const elements = document.querySelectorAll('a, h1, h2, h3');
+        elements.forEach(element => {
+          if (element.tagName === 'A') {
+            element.style.color = color;
+          } else {
+            element.style.color = color;
+          }
+        });
+      }
+      
+      function loadSiteCustomization() {
+        const siteTitle = localStorage.getItem('siteTitle');
+        const welcomeMessage = localStorage.getItem('welcomeMessage');
+        const primaryColor = localStorage.getItem('primaryColor');
+        
+        if (siteTitle) {
+          document.getElementById('siteTitle').value = siteTitle;
+          document.title = siteTitle;
+        }
+        
+        if (welcomeMessage) {
+          document.getElementById('welcomeMessage').value = welcomeMessage;
+          // Atualizar mensagem de boas-vindas na página principal
+          const welcomeContainer = document.getElementById('welcome-message-content');
+          if (welcomeContainer) {
+            welcomeContainer.innerHTML = `
+              <h3 style="color: #ff69b4; margin-bottom: 15px;">🌟 Mensagem Personalizada</h3>
+              <p style="color: #ffffff; font-size: 16px; line-height: 1.6;">
+                ${welcomeMessage}
+              </p>
+            `;
+          }
+        }
+        
+        if (primaryColor) {
+          document.getElementById('primaryColor').value = primaryColor;
+          applyCustomColors(primaryColor);
+        }
+      }
+      
+      function exportAllSiteData() {
+        const siteData = {
+          pdfs: JSON.parse(localStorage.getItem('pdfs') || '[]'),
+          feedbacks: JSON.parse(localStorage.getItem('feedbacks') || '[]'),
+          settings: {
+            freeOrdersEnabled: localStorage.getItem('freeOrdersEnabled'),
+            customOrdersEnabled: localStorage.getItem('customOrdersEnabled'),
+            statusMessage: localStorage.getItem('statusMessage'),
+            precoBasico: localStorage.getItem('precoBasico'),
+            precoIntermediario: localStorage.getItem('precoIntermediario'),
+            precoMagico: localStorage.getItem('precoMagico'),
+            prazoEntrega: localStorage.getItem('prazoEntrega'),
+            emailContato: localStorage.getItem('emailContato'),
+            pixKey: localStorage.getItem('pixKey'),
+            siteTitle: localStorage.getItem('siteTitle'),
+            welcomeMessage: localStorage.getItem('welcomeMessage'),
+            primaryColor: localStorage.getItem('primaryColor')
+          },
+          exportDate: new Date().toISOString(),
+          version: '1.0'
+        };
+        
+        const dataStr = JSON.stringify(siteData, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `teris_site_backup_${new Date().toISOString().split('T')[0]}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+        alert('✅ Backup completo exportado com sucesso!');
+      }
+
+      function updatePageContent() {
+        // Atualizar preços na página
+        const precoBasico = localStorage.getItem('precoBasico') || '20';
+        const precoIntermediario = localStorage.getItem('precoIntermediario') || '30';
+        const precoMagico = localStorage.getItem('precoMagico') || '77';
+        
+        // Atualizar preços nos elementos da página
+        const priceElements = document.querySelectorAll('h3');
+        priceElements.forEach(element => {
+          if (element.textContent.includes('Pacote Básico')) {
+            element.textContent = element.textContent.replace(/R\$[0-9]+/, `R$${precoBasico}`);
+          } else if (element.textContent.includes('Pacote Intermediário')) {
+            element.textContent = element.textContent.replace(/R\$[0-9]+/, `R$${precoIntermediario}`);
+          } else if (element.textContent.includes('Pacote Mágico')) {
+            element.textContent = element.textContent.replace(/R\$[0-9]+/, `R$${precoMagico}`);
+          }
+        });
+        
+        // Atualizar informações de contato
+        const emailContato = localStorage.getItem('emailContato') || 'teris.ofc777@gmail.com';
+        const pixKey = localStorage.getItem('pixKey') || 'teris.ofc777@gmail.com';
+        
+        // Atualizar emails na página
+        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+        emailLinks.forEach(link => {
+          link.href = `mailto:${emailContato}`;
+          link.textContent = emailContato;
+        });
+        
+        // Atualizar chave Pix
+        const pixElements = document.querySelectorAll('p');
+        pixElements.forEach(element => {
+          if (element.textContent.includes('teris.ofc777@gmail.com') && element.style.color === 'rgb(0, 255, 255)') {
+            element.textContent = pixKey;
+          }
+        });
+        
+        // Atualizar PDFs dinâmicos na página principal
+        displayMainPagePDFs();
+      }
+      
+      function displayMainPagePDFs() {
+        const container = document.getElementById('dynamic-pdfs-container');
+        const pdfs = JSON.parse(localStorage.getItem('pdfs') || '[]');
+        
+        if (pdfs.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; color: #ffffff; opacity: 0.7; padding: 20px;">
+              📚 Nenhum PDF disponível no momento.
+              <br><small style="font-size: 12px;">Os PDFs serão adicionados pelo administrador.</small>
+            </div>
+          `;
+          return;
+        }
+        
+        let html = '';
+        const languageNames = { pt: '🇧🇷', en: '🇺🇸', es: '🇪🇸' };
+        const categoryIcons = { manual: '📘', guide: '🔧', tutorial: '📖', other: '📄' };
+        
+        pdfs.forEach(pdf => {
+          html += `
+            <a href="${pdf.link}" target="_blank" style="display: block; background-color: #222222; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-decoration: none; border-left: 4px solid #ff69b4; transition: all 0.3s ease;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px;">${categoryIcons[pdf.category]}</span>
+                <div style="flex: 1;">
+                  <h4 style="color: #ffffff; margin: 0 0 5px 0; font-size: 16px;">${pdf.title}</h4>
+                  <p style="color: #ffffff; opacity: 0.8; margin: 0; font-size: 12px;">
+                    ${languageNames[pdf.language]} ${pdf.category.charAt(0).toUpperCase() + pdf.category.slice(1)} • Adicionado em ${pdf.dateAdded}
+                  </p>
+                </div>
+                <span style="color: #ff69b4; font-size: 18px;">🔗</span>
+              </div>
+            </a>
+          `;
+        });
+        
+        container.innerHTML = html;
+      }
+
+      function updateOrderStatus() {
+        const freeEnabled = localStorage.getItem('freeOrdersEnabled') === 'true';
+        const customEnabled = localStorage.getItem('customOrdersEnabled') === 'true';
+        
+        // Atualizar formulários
+        const freeForm = document.querySelector('#freeModal form');
+        const customForm = document.querySelector('#customModal form');
+        
+        if (freeForm) {
+          freeForm.style.opacity = freeEnabled ? '1' : '0.5';
+          freeForm.style.pointerEvents = freeEnabled ? 'auto' : 'none';
+          
+          const freeInputs = freeForm.querySelectorAll('input, textarea, button');
+          freeInputs.forEach(input => {
+            input.disabled = !freeEnabled;
+          });
+          
+          const freeButton = freeForm.querySelector('button[type="submit"]');
+          if (freeButton) {
+            freeButton.textContent = freeEnabled ? 'Enviar Pedido Gratuito' : 'Formulário Temporariamente Desabilitado';
+          }
+        }
+        
+        if (customForm) {
+          customForm.style.opacity = customEnabled ? '1' : '0.5';
+          customForm.style.pointerEvents = customEnabled ? 'auto' : 'none';
+          
+          const customInputs = customForm.querySelectorAll('input, textarea, button');
+          customInputs.forEach(input => {
+            input.disabled = !customEnabled;
+          });
+          
+          const customButton = customForm.querySelector('button[type="submit"]');
+          if (customButton) {
+            customButton.textContent = customEnabled ? 'Solicitar Encomenda' : 'Formulário Temporariamente Desabilitado';
+          }
+        }
+        
+        // Atualizar status no modal de status
+        const statusBox = document.querySelector('#statusModal .status-box');
+        if (statusBox) {
+          const statusMessage = localStorage.getItem('statusMessage') || 'No momento não estou aceitando pedidos.';
+          statusBox.innerHTML = `
+            <h3>⚠️ Status dos Pedidos</h3>
+            <p><strong>Pedidos Gratuitos:</strong> ${freeEnabled ? '✅ Aceitando' : '❌ Suspensos'}</p>
+            <p><strong>Pedidos Personalizados:</strong> ${customEnabled ? '✅ Aceitando' : '❌ Suspensos'}</p>
+            <p>📌 ${statusMessage}</p>
+          `;
+        }
+      }
+
+    // Sistema de Feedback
+    function handleFeedbackSubmit(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const nome = form.querySelector('#feedback-nome').value.trim();
+      const mensagem = form.querySelector('#feedback-mensagem').value.trim();
+      
+      if (!nome || !mensagem) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+      
+      // Criar objeto de feedback
+      const feedback = {
+        nome: nome,
+        mensagem: mensagem,
+        data: new Date().toLocaleDateString('pt-BR'),
+        hora: new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})
+      };
+      
+      // Salvar feedback no localStorage
+      saveFeedback(feedback);
+      
+      // Exibir feedback na página
+      displayFeedbacks();
+      
+      // Limpar formulário
+      form.reset();
+      
+      // Mostrar mensagem de sucesso
+      alert('Feedback enviado com sucesso! Obrigado pela sua opinião.');
+    }
+    
+    function saveFeedback(feedback) {
+      let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      feedbacks.unshift(feedback); // Adicionar no início
+      
+      // Manter apenas os últimos 20 feedbacks
+      if (feedbacks.length > 20) {
+        feedbacks = feedbacks.slice(0, 20);
+      }
+      
+      localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+    }
+    
+    function displayFeedbacks() {
+      const container = document.getElementById('feedbacks-container');
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      
+      if (feedbacks.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #ffffff; opacity: 0.7;">Nenhum feedback ainda. Seja o primeiro!</p>';
+        return;
+      }
+      
+      let html = '';
+      feedbacks.forEach((feedback, index) => {
+        html += `
+          <div id="feedback-${index}" style="background-color: #222222; border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #ffffff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <h4 style="color: #00ffff; margin: 0; font-size: 16px;">${feedback.nome}</h4>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: #ffffff; font-size: 12px; opacity: 0.7;">
+                  ${feedback.data} às ${feedback.hora}
+                  ${feedback.editado ? `<br><small style="color: #00ff00;">✏️ Editado em ${feedback.dataEditado} às ${feedback.horaEditado}</small>` : ''}
+                </span>
+                <div style="display: flex; gap: 5px;">
+                  <button onclick="editFeedback(${index})" style="background: #00ffff; color: #000; border: none; padding: 3px 8px; border-radius: 4px; font-size: 10px; cursor: pointer; font-weight: bold;">✏️</button>
+                  <button onclick="deleteFeedback(${index})" style="background: #ff4444; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; font-size: 10px; cursor: pointer; font-weight: bold;">🗑️</button>
+                </div>
+              </div>
+            </div>
+            <p id="feedback-text-${index}" style="color: #ffffff; margin: 0; line-height: 1.5;">${feedback.mensagem}</p>
+            <div id="edit-form-${index}" style="display: none; margin-top: 10px;">
+              <textarea id="edit-text-${index}" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ffffff; background-color: #333; color: #ffffff; margin-bottom: 10px;" rows="3">${feedback.mensagem}</textarea>
+              <div style="display: flex; gap: 10px;">
+                <button onclick="saveEdit(${index})" style="background: #00ff00; color: #000; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">✅ Salvar</button>
+                <button onclick="cancelEdit(${index})" style="background: #ffaa00; color: #000; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">❌ Cancelar</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+    }
+    
+    // Funções para editar e apagar feedbacks
+    function editFeedback(index) {
+      const editForm = document.getElementById(`edit-form-${index}`);
+      const feedbackText = document.getElementById(`feedback-text-${index}`);
+      
+      editForm.style.display = 'block';
+      feedbackText.style.display = 'none';
+    }
+    
+    function saveEdit(index) {
+      const newText = document.getElementById(`edit-text-${index}`).value.trim();
+      
+      if (!newText) {
+        alert('O feedback não pode estar vazio.');
+        return;
+      }
+      
+      let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      feedbacks[index].mensagem = newText;
+      feedbacks[index].editado = true;
+      feedbacks[index].dataEditado = new Date().toLocaleDateString('pt-BR');
+      feedbacks[index].horaEditado = new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
+      
+      localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+      displayFeedbacks();
+    }
+    
+    function cancelEdit(index) {
+      const editForm = document.getElementById(`edit-form-${index}`);
+      const feedbackText = document.getElementById(`feedback-text-${index}`);
+      
+      editForm.style.display = 'none';
+      feedbackText.style.display = 'block';
+    }
+    
+    function deleteFeedback(index) {
+      if (confirm('Tem certeza que deseja apagar este feedback?')) {
+        let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+        feedbacks.splice(index, 1);
+        localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+        displayFeedbacks();
+      }
+    }
+    
+         // Carregar idioma e feedbacks quando a página carregar
+     document.addEventListener('DOMContentLoaded', function() {
+       loadLanguage();
+       displayFeedbacks();
+       updateOrderStatus(); // Inicializar status dos pedidos
+       updateFeedbackCount(); // Inicializar contador de feedbacks
+       updatePageContent(); // Atualizar preços e contatos na página
+       loadSiteCustomization(); // Carregar personalizações do site
+       displayPDFs(); // Carregar lista de PDFs
+       displayMainPagePDFs(); // Carregar PDFs na página principal
+     });
+
+    // ... existing code ...
+    <script>
+      // Função para buscar PDFs do arquivo compartilhado
+      async function fetchPDFs() {
+        try {
+          const response = await fetch('pdfs.json');
+          if (!response.ok) throw new Error('Erro ao buscar PDFs');
+          return await response.json();
+        } catch (e) {
+          return [];
+        }
+      }
+
+      // Função para buscar personalização global
+      async function fetchCustomization() {
+        try {
+          const response = await fetch('customization.json');
+          if (!response.ok) throw new Error('Erro ao buscar customização');
+          return await response.json();
+        } catch (e) {
+          return {};
+        }
+      }
+
+      // Exibir PDFs na página principal
+      async function displayMainPagePDFs() {
+        const container = document.getElementById('dynamic-pdfs-container');
+        const pdfs = await fetchPDFs();
+        if (!pdfs.length) {
+          container.innerHTML = `<div style="text-align: center; color: #ffffff; opacity: 0.7; padding: 20px;">📚 Nenhum PDF disponível no momento.</div>`;
+          return;
+        }
+        let html = '';
+        const languageNames = { pt: '🇧🇷', en: '🇺🇸', es: '🇪🇸' };
+        const categoryIcons = { manual: '📘', guide: '🔧', tutorial: '📖', other: '📄' };
+        pdfs.forEach(pdf => {
+          html += `
+            <a href="${pdf.link}" target="_blank" style="display: block; background-color: #222222; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-decoration: none; border-left: 4px solid #ff69b4; transition: all 0.3s ease;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px;">${categoryIcons[pdf.category]}</span>
+                <div style="flex: 1;">
+                  <h4 style="color: #ffffff; margin: 0 0 5px 0; font-size: 16px;">${pdf.title}</h4>
+                  <p style="color: #ffffff; opacity: 0.8; margin: 0; font-size: 12px;">
+                    ${languageNames[pdf.language]} ${pdf.category.charAt(0).toUpperCase() + pdf.category.slice(1)} • Adicionado em ${pdf.dateAdded}
+                  </p>
+                </div>
+                <span style="color: #ff69b4; font-size: 18px;">🔗</span>
+              </div>
+            </a>
+          `;
+        });
+        container.innerHTML = html;
+      }
+
+      // Exibir mensagem de boas-vindas personalizada global
+      async function displayWelcomeMessage() {
+        const customization = await fetchCustomization();
+        const welcomeContainer = document.getElementById('welcome-message-content');
+        if (customization.welcomeMessage && welcomeContainer) {
+          welcomeContainer.innerHTML = `
+            <h3 style="color: #ff69b4; margin-bottom: 15px;">🌟 Mensagem Personalizada</h3>
+            <p style="color: #ffffff; font-size: 16px; line-height: 1.6;">${customization.welcomeMessage}</p>
+          `;
+        }
+        if (customization.siteTitle) {
+          document.title = customization.siteTitle;
+          const h1 = document.querySelector('h1[data-translate="title"]');
+          if (h1) h1.textContent = customization.siteTitle;
+        }
+      }
+
+      // Chamar ao carregar a página
+      window.addEventListener('DOMContentLoaded', () => {
+        displayMainPagePDFs();
+        displayWelcomeMessage();
+      });
+    </script>
+  </script>
+</body>
+</html>
+
