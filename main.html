@@ -250,6 +250,42 @@
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
     }
 
+    .pdf-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .pdf-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-size: 0.9em;
+      border: 1px solid #ffffff;
+    }
+
+    .pdf-read {
+      background: linear-gradient(45deg, #4CAF50, #45a049);
+      color: white;
+    }
+
+    .pdf-download {
+      background: linear-gradient(45deg, #DC143C, #8B0000);
+      color: white;
+    }
+
+    .pdf-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
     .pdf-category {
       display: inline-block;
       padding: 5px 12px;
@@ -1245,6 +1281,7 @@
           package_management: 'Gerenciar Informações de Encomendas',
           orders_management: 'Gerenciar Pedidos',
           available_pdfs: 'PDFs Disponíveis',
+        guides: 'Guias',
           make_order: 'Fazer Pedido',
           full_name: 'Nome Completo:',
           email: 'Email:',
@@ -1291,6 +1328,7 @@
           package_management: 'Manage Package Information',
           orders_management: 'Manage Orders',
           available_pdfs: 'Available PDFs',
+        guides: 'Guides',
           make_order: 'Place Order',
           full_name: 'Full Name:',
           email: 'Email:',
@@ -1337,6 +1375,7 @@
           package_management: 'Gestionar Información de Paquetes',
           orders_management: 'Gestionar Pedidos',
           available_pdfs: 'PDFs Disponibles',
+        guides: 'Guías',
           make_order: 'Hacer Pedido',
           full_name: 'Nombre Completo:',
           email: 'Email:',
@@ -1537,14 +1576,15 @@
         pdfCard.className = 'pdf-card';
         
         const category = getCategoryName(pdf.category, currentLanguage);
-        const date = new Date(pdf.dateAdded).toLocaleDateString();
         
         pdfCard.innerHTML = `
           <div class="pdf-category">${category}</div>
           <h3>${pdf.title}</h3>
-          <p>PDF disponível para download</p>
-          <div class="pdf-date">${date}</div>
-          <a href="${pdf.link}" target="_blank">Download PDF</a>
+          <p>${pdf.description}</p>
+          <div class="pdf-actions">
+            <a href="${pdf.url}" target="_blank" class="pdf-btn pdf-read">📖 Ler Online</a>
+            <a href="${pdf.downloadUrl}" target="_blank" class="pdf-btn pdf-download">📥 Baixar</a>
+          </div>
         `;
         
         container.appendChild(pdfCard);
@@ -1630,18 +1670,24 @@
         pt: {
           manual: 'Manual',
           guide: 'Guia',
+          guides: 'Guias',
+          'Guias': 'Guias',
           tutorial: 'Tutorial',
           other: 'Outro'
         },
         en: {
           manual: 'Manual',
           guide: 'Guide',
+          guides: 'Guides',
+          'Guides': 'Guides',
           tutorial: 'Tutorial',
           other: 'Other'
         },
         es: {
           manual: 'Manual',
           guide: 'Guía',
+          guides: 'Guías',
+          'Guías': 'Guías',
           tutorial: 'Tutorial',
           other: 'Otro'
         }

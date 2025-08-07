@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "pdf_teris_pt",
+    "title": "Guia Teris Inicial - Português",
+    "description": "Manual completo em português com técnicas avançadas, práticas espirituais e conhecimentos sobre manifestação.",
+    "category": "Guias",
+    "url": "https://drive.google.com/file/d/1APlA2fFNhq7gKgJWEz634d1TEswz1fmg/view?usp=sharing",
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1APlA2fFNhq7gKgJWEz634d1TEswz1fmg",
+    "language": "pt",
+    "featured": true
+  },
+  {
+    "id": "pdf_teris_en",
+    "title": "Initial Teris Guide - English",
+    "description": "Complete manual in English with advanced techniques, spiritual practices and manifestation knowledge.",
+    "category": "Guides",
+    "url": "https://drive.google.com/file/d/1WvHQVsSJRkCPCpvtrYqhCTk05kVAinNn/view?usp=sharing",
+    "downloadUrl": "https://drive.google.com/uc?export=download&id=1WvHQVsSJRkCPCpvtrYqhCTk05kVAinNn",
+    "language": "en",
+    "featured": true
+  }
+]
