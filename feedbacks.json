@@ -1,0 +1,51 @@
+{
+  "feedbacks": [
+    {
+      "id": "1704067200000abc123",
+      "name": "Maria Silva",
+      "message": "Os subliminares do Templo Teris são incríveis! Já senti uma diferença enorme na minha energia e disposição. Recomendo muito!",
+      "date": "2024-01-01T10:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "1704153600000def456",
+      "name": "João Santos",
+      "message": "Conteúdo de qualidade excepcional. Os guias são muito bem explicados e os áudios têm uma qualidade profissional impressionante.",
+      "date": "2024-01-02T14:30:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "1704240000000ghi789",
+      "name": "Ana Costa",
+      "message": "Gostaria de mais conteúdo sobre proteção energética. Os que já existem são ótimos, mas seria interessante ter mais opções.",
+      "date": "2024-01-03T09:15:00.000Z",
+      "status": "pending"
+    },
+    {
+      "id": "1704326400000jkl012",
+      "name": "Pedro Oliveira",
+      "message": "Site muito bem organizado e fácil de navegar. O sistema de pedidos funciona perfeitamente.",
+      "date": "2024-01-04T16:45:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "1704412800000mno345",
+      "name": "Lucia Ferreira",
+      "message": "Conteúdo inapropriado e não funciona",
+      "date": "2024-01-05T11:20:00.000Z",
+      "status": "rejected"
+    }
+  ],
+  "settings": {
+    "feedbackEnabled": true,
+    "moderationEnabled": true,
+    "autoApprove": false,
+    "lastUpdate": "2024-01-05T12:00:00.000Z"
+  },
+  "metadata": {
+    "totalFeedbacks": 5,
+    "approvedFeedbacks": 3,
+    "pendingFeedbacks": 1,
+    "rejectedFeedbacks": 1
+  }
+}
