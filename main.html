@@ -1460,6 +1460,11 @@
       <h2 data-translate="make_order">Fazer Pedido</h2>
       <div id="orderStatus" style="text-align: center; margin-bottom: 20px;">
         <span class="status-indicator status-accepting" id="orderStatusIndicator">✅ Aceitando Pedidos</span>
+        <div id="syncButtonContainer" style="margin-top: 10px; display: none;">
+          <button onclick="forceSync()" class="sync-btn" style="background: linear-gradient(45deg, #00ff41, #00cc33); color: #000000; border: none; padding: 8px 16px; border-radius: 5px; font-size: 12px; cursor: pointer;">
+            🔄 Sincronizar
+          </button>
+        </div>
       </div>
       
       <!-- Free Orders Form -->
@@ -2186,6 +2191,12 @@
         };
         localStorage.setItem('adminSettings', JSON.stringify(adminSettings));
         console.log('Configurações padrão salvas:', adminSettings);
+      }
+      
+      // Inicializar lastConfigUpdate com o valor atual
+      if (adminSettings.lastUpdate) {
+        lastConfigUpdate = adminSettings.lastUpdate;
+        console.log('lastConfigUpdate inicializado com:', lastConfigUpdate);
       }
       
       // Aplicar configurações salvas
@@ -2951,6 +2962,23 @@
       }
     }
     
+    // Função para forçar sincronização completa
+    function forceSync() {
+      console.log('Forçando sincronização completa...');
+      
+      // Limpar lastConfigUpdate para forçar nova verificação
+      lastConfigUpdate = '';
+      
+      // Recarregar configurações do localStorage
+      const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      
+      // Aplicar configurações imediatamente
+      applyAdminUpdates(adminSettings);
+      
+      // Verificar atualizações
+      setTimeout(checkForUpdates, 500);
+    }
+    
     // Função para testar localStorage em dispositivos móveis
     function testLocalStorage() {
       try {
@@ -2973,12 +3001,37 @@
         return false;
       }
     }
+    
+    // Função para verificar se as configurações realmente mudaram
+    function hasSettingsChanged(newSettings, oldSettings) {
+      if (!oldSettings) return true;
+      
+      const keysToCheck = ['freeOrdersEnabled', 'customOrdersEnabled', 'feedbackEnabled', 'pdfsEnabled'];
+      
+      for (const key of keysToCheck) {
+        if (newSettings[key] !== oldSettings[key]) {
+          console.log(`Mudança detectada em ${key}:`, oldSettings[key], '->', newSettings[key]);
+          return true;
+        }
+      }
+      
+      return false;
+    }
 
     function startRealTimeUpdates() {
       console.log('Iniciando sistema de atualizações em tempo real...');
       
       const isMobile = isMobileDevice();
       console.log('Dispositivo móvel:', isMobile);
+      
+      // Mostrar botão de sincronização em dispositivos móveis
+      if (isMobile) {
+        const syncButtonContainer = document.getElementById('syncButtonContainer');
+        if (syncButtonContainer) {
+          syncButtonContainer.style.display = 'block';
+          console.log('Botão de sincronização habilitado para dispositivo móvel');
+        }
+      }
       
       // Check for config updates (mais frequente para mobile)
       const updateInterval = isMobile ? 2000 : 3000;
@@ -3029,8 +3082,29 @@
         
         console.log('Verificando atualizações - lastUpdate:', lastUpdate, 'lastConfigUpdate:', lastConfigUpdate);
         
-        if (lastUpdate !== lastConfigUpdate) {
+        // Se lastConfigUpdate está vazio, inicializar com o valor atual
+        if (!lastConfigUpdate && lastUpdate) {
+          console.log('Inicializando lastConfigUpdate com valor atual:', lastUpdate);
+          lastConfigUpdate = lastUpdate;
+          // Aplicar configurações sem mostrar notificação (primeira vez)
+          applyAdminUpdates(adminSettings);
+          return;
+        }
+        
+        // Verificar se houve mudança real nas configurações
+        const currentSettings = {
+          freeOrdersEnabled: freeOrdersEnabled,
+          customOrdersEnabled: customOrdersEnabled,
+          feedbackEnabled: adminSettings.feedbackEnabled,
+          pdfsEnabled: adminSettings.pdfsEnabled
+        };
+        
+        const settingsChanged = hasSettingsChanged(adminSettings, currentSettings);
+        
+        // Só detectar mudança se realmente houve mudança
+        if (lastUpdate && lastUpdate !== lastConfigUpdate && settingsChanged) {
           console.log('Atualização detectada! Aplicando mudanças...');
+          console.log('Mudança de:', lastConfigUpdate, 'para:', lastUpdate);
           lastConfigUpdate = lastUpdate;
           applyAdminUpdates(adminSettings);
           
@@ -3038,6 +3112,11 @@
           if (!isAdminLoggedIn) {
             showNotification('Site atualizado com as últimas mudanças!', 'success');
           }
+        } else if (lastUpdate && lastUpdate !== lastConfigUpdate && !settingsChanged) {
+          console.log('Timestamp mudou mas configurações são iguais, atualizando lastConfigUpdate');
+          lastConfigUpdate = lastUpdate;
+        } else {
+          console.log('Nenhuma atualização detectada');
         }
       } catch (error) {
         console.error('Erro ao verificar atualizações:', error);
