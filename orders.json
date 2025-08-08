@@ -1,0 +1,82 @@
+{
+  "orders": [
+    {
+      "id": "1704067200000abc123",
+      "type": "free",
+      "name": "Ana Silva",
+      "email": "ana.silva@email.com",
+      "orderDetails": "Subliminar para aumentar a confiança e autoestima",
+      "youtubeVisibility": "unlisted",
+      "additionalMessage": "Gostaria que fosse com música relaxante",
+      "deliveryMethod": "youtube",
+      "date": "2024-01-01T10:00:00.000Z",
+      "status": "approved",
+      "priority": "medium"
+    },
+    {
+      "id": "1704153600000def456",
+      "type": "custom",
+      "name": "João Santos",
+      "email": "joao.santos@email.com",
+      "orderDetails": "Subliminar personalizado para prosperidade financeira com magia",
+      "deliveryMethod": "google_drive",
+      "additionalMessage": "Preciso para um projeto importante",
+      "date": "2024-01-02T14:30:00.000Z",
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "id": "1704240000000ghi789",
+      "type": "free",
+      "name": "Maria Costa",
+      "email": "maria.costa@email.com",
+      "orderDetails": "Subliminar para melhorar o sono e relaxamento",
+      "youtubeVisibility": "unlisted",
+      "additionalMessage": "",
+      "deliveryMethod": "youtube",
+      "date": "2024-01-03T09:15:00.000Z",
+      "status": "completed",
+      "priority": "medium"
+    },
+    {
+      "id": "1704326400000jkl012",
+      "type": "custom",
+      "name": "Pedro Oliveira",
+      "email": "pedro.oliveira@email.com",
+      "orderDetails": "Subliminar para proteção energética e limpeza de aura",
+      "deliveryMethod": "email",
+      "additionalMessage": "Urgente, estou passando por um momento difícil",
+      "date": "2024-01-04T16:45:00.000Z",
+      "status": "approved",
+      "priority": "high"
+    },
+    {
+      "id": "1704412800000mno345",
+      "type": "free",
+      "name": "Lucia Ferreira",
+      "email": "lucia.ferreira@email.com",
+      "orderDetails": "Subliminar para atrair amor e relacionamentos",
+      "youtubeVisibility": "public",
+      "additionalMessage": "Quero compartilhar com amigos",
+      "deliveryMethod": "youtube",
+      "date": "2024-01-05T11:20:00.000Z",
+      "status": "rejected",
+      "priority": "low"
+    }
+  ],
+  "settings": {
+    "freeOrdersEnabled": true,
+    "customOrdersEnabled": true,
+    "autoApprove": false,
+    "lastUpdate": "2024-01-05T12:00:00.000Z"
+  },
+  "metadata": {
+    "totalOrders": 5,
+    "freeOrders": 3,
+    "customOrders": 2,
+    "pendingOrders": 1,
+    "approvedOrders": 2,
+    "rejectedOrders": 1,
+    "completedOrders": 1
+  }
+}
