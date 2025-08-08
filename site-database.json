@@ -1,0 +1,127 @@
+{
+  "site": {
+    "info": {
+      "name": "Templo Teris",
+      "version": "2.0",
+      "lastUpdate": "2024-01-01T00:00:00.000Z",
+      "admin": "Maria Isabel"
+    },
+    "settings": {
+      "language": "pt",
+      "theme": {
+        "primaryColor": "#00ff41",
+        "secondaryColor": "#00cc33",
+        "backgroundColor": "#000000",
+        "textColor": "#00ff41"
+      },
+      "features": {
+        "feedbackEnabled": true,
+        "ordersEnabled": true,
+        "pdfsEnabled": true,
+        "freeOrdersEnabled": true,
+        "customOrdersEnabled": true
+      }
+    }
+  },
+  "content": {
+    "pages": {
+      "home": {
+        "title": "Bem-vindo ao Templo Teris | Subliminares",
+        "description": "Subliminares para transformação pessoal",
+        "lastUpdate": "2024-01-01T00:00:00.000Z"
+      },
+      "about": {
+        "title": "Sobre o Templo Teris",
+        "content": "Informações sobre o projeto e sua missão",
+        "lastUpdate": "2024-01-01T00:00:00.000Z"
+      }
+    },
+    "translations": {
+      "pt": {
+        "site_title": "Bem-vindo ao Templo Teris | Subliminares",
+        "welcome_message": "Subliminares para transformação pessoal"
+      },
+      "en": {
+        "site_title": "Welcome to Templo Teris | Subliminals",
+        "welcome_message": "Subliminals for personal transformation"
+      },
+      "es": {
+        "site_title": "Bienvenido a Templo Teris | Subliminales",
+        "welcome_message": "Subliminales para transformación personal"
+      }
+    }
+  },
+  "packages": {
+    "basic": {
+      "price": "R$15",
+      "description": "Até 100 afirmações\nBooster energético básico\nProteção energética\nMúsica de fundo",
+      "features": [
+        "Até 100 afirmações",
+        "Booster energético básico",
+        "Proteção energética",
+        "Música de fundo"
+      ]
+    },
+    "intermediate": {
+      "price": "R$30",
+      "description": "Até 200 afirmações\nBooster energético forte (com ou sem magia, você decide)\nProteção energética forte\nFrequência vibracional opcional (ex: 432Hz, 528Hz)\nEdição mais equilibrada\nMúsica personalizada conforme o tema",
+      "features": [
+        "Até 200 afirmações",
+        "Booster energético forte",
+        "Proteção energética forte",
+        "Frequência vibracional opcional",
+        "Edição mais equilibrada",
+        "Música personalizada"
+      ]
+    },
+    "magic": {
+      "price": "R$77",
+      "description": "Até 300 afirmações\nBooster mágico com magia\nProteção com selamento mágico\nFrequência oculta espiritual\nCriado em estado de transe\nEdição completa com camadas mágicas\nMúsica à sua escolha ou canalizada",
+      "features": [
+        "Até 300 afirmações",
+        "Booster mágico com magia",
+        "Proteção com selamento mágico",
+        "Frequência oculta espiritual",
+        "Criado em estado de transe",
+        "Edição completa com camadas mágicas",
+        "Música à sua escolha ou canalizada"
+      ]
+    }
+  },
+  "contact": {
+    "pix": {
+      "key": "maria.isabel@email.com",
+      "type": "email"
+    },
+    "email": {
+      "orders": "pedidos@temploteris.com",
+      "support": "suporte@temploteris.com"
+    },
+    "social": {
+      "youtube": "https://youtube.com/@temploteris",
+      "instagram": "https://instagram.com/temploteris"
+    }
+  },
+  "analytics": {
+    "visitors": {
+      "total": 0,
+      "monthly": 0,
+      "daily": 0
+    },
+    "orders": {
+      "total": 0,
+      "completed": 0,
+      "pending": 0
+    },
+    "feedback": {
+      "total": 0,
+      "positive": 0,
+      "negative": 0
+    }
+  },
+  "backups": {
+    "lastBackup": "2024-01-01T00:00:00.000Z",
+    "backupFrequency": "daily",
+    "autoBackup": true
+  }
+}
