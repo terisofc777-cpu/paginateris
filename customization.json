@@ -1,4 +1,15 @@
 {
-  "welcomeMessage": "Bem-vindo ao Canal Teris! Aqui você encontra tudo para sua transformação.",
-  "siteTitle": "Teris | Subliminares"
+  "welcomeMessage": "Bem-vindo ao Canal Teris! Aqui você encontra tudo para sua transformação pessoal e espiritual.",
+  "siteTitle": "Teris | Subliminares",
+  "theme": {
+    "primaryColor": "#00ff41",
+    "secondaryColor": "#00cc33",
+    "backgroundColor": "#000000",
+    "textColor": "#00ff41"
+  },
+  "features": {
+    "realTimeUpdates": true,
+    "adminControls": true,
+    "responsiveDesign": true
+  }
 }

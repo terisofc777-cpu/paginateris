@@ -1,143 +1,133 @@
-# Teris | Subliminares
+# 🌟 Teris | Subliminares
 
-Site profissional para canal Teris com sistema de administração completo.
+Um site profissional e moderno para transformação pessoal e espiritual, com design inspirado nos olhos do Banguela de "Como Treinar Seu Dragão".
 
-## 🚀 Funcionalidades
+## ✨ Novas Funcionalidades
 
-- **PDFs Dinâmicos**: Lista de PDFs carregada automaticamente do arquivo `pdfs.json`
-- **Sistema de Tradução**: Português, Inglês e Espanhol
-- **Pedidos**: Formulários para pedidos gratuitos e personalizados
-- **Feedback**: Sistema de comentários dos usuários
-- **Painel Administrativo**: Controle de pedidos e mensagens
-- **Netlify CMS**: Painel de administração global (visível para todos)
+### 🎨 Design Renovado
+- **Tema Verde e Preto**: Inspirado na cor dos olhos do Banguela
+- **Efeitos Visuais**: Partículas flutuantes e brilhos animados
+- **Interface Responsiva**: Otimizada para PC e dispositivos móveis
+- **Animações Suaves**: Transições e efeitos profissionais
 
-## 🎨 Design
+### ⚡ Atualizações em Tempo Real
+- **Sincronização Automática**: Mudanças do admin são refletidas instantaneamente
+- **Controles Administrativos**: Habilitar/desabilitar funcionalidades em tempo real
+- **Notificações**: Sistema de alertas para usuários sobre atualizações
+- **Configurações Persistentes**: Alterações salvas automaticamente
 
-- **Tema**: Vermelho com branco e dourado
-- **Responsivo**: Funciona em todos os dispositivos
-- **Animações**: Efeitos suaves e profissionais
-- **Glassmorphism**: Design moderno com efeitos de vidro
+### 🔐 Painel Administrativo Avançado
+- **Controle de Pedidos**: Habilitar/desabilitar sistema de pedidos
+- **Gerenciamento de Feedback**: Ativar/desativar seção de feedback
+- **Controle de PDFs**: Gerenciar visibilidade dos documentos
+- **Pedidos Gratuitos**: Controlar aceitação de pedidos gratuitos
+- **Limpeza de Dados**: Função para resetar todas as configurações
 
-## 📁 Estrutura dos Arquivos
+## 🚀 Como Usar
+
+### Para Usuários
+1. Acesse o site através de `index.html`
+2. Aguarde a tela de abertura carregar
+3. Navegue pelas seções disponíveis
+4. As atualizações aparecem automaticamente
+
+### Para Administradores
+1. Acesse o painel admin na seção administrativa
+2. Use a senha configurada para login
+3. Controle as funcionalidades através dos botões
+4. As mudanças são aplicadas em tempo real para todos os usuários
+
+## 🎯 Funcionalidades Principais
+
+### 📚 Biblioteca de PDFs
+- Categorização por tipo e idioma
+- Sistema de download e visualização
+- Gerenciamento administrativo completo
+
+### 📦 Sistema de Pedidos
+- Pedidos gratuitos e personalizados
+- Controle de status em tempo real
+- Formulários intuitivos
+
+### 💬 Sistema de Feedback
+- Comentários dos usuários
+- Moderação administrativa
+- Interface amigável
+
+### 🌍 Suporte Multi-idioma
+- Português e Inglês
+- Tradução automática de conteúdo
+- Interface adaptativa
+
+## 🛠️ Tecnologias Utilizadas
+
+- **HTML5**: Estrutura semântica
+- **CSS3**: Estilos avançados e animações
+- **JavaScript**: Funcionalidades interativas
+- **LocalStorage**: Persistência de dados
+- **Netlify CMS**: Gerenciamento de conteúdo
+
+## 📱 Responsividade
+
+O site é totalmente responsivo e funciona perfeitamente em:
+- ✅ Desktop e Laptop
+- ✅ Tablets
+- ✅ Smartphones
+- ✅ Diferentes navegadores
+
+## 🎨 Paleta de Cores
+
+- **Verde Primário**: `#00ff41` (Cor dos olhos do Banguela)
+- **Verde Secundário**: `#00cc33`
+- **Fundo**: `#000000` (Preto)
+- **Texto**: `#00ff41` (Verde)
+
+## 🔄 Sistema de Atualizações
+
+### Como Funciona
+1. Admin faz alteração no painel
+2. Sistema detecta mudança automaticamente
+3. Configuração é salva no localStorage
+4. Todos os usuários recebem notificação
+5. Interface é atualizada em tempo real
+
+### Configurações Disponíveis
+- `ordersEnabled`: Controla sistema de pedidos
+- `feedbackEnabled`: Controla seção de feedback
+- `pdfsEnabled`: Controla visibilidade dos PDFs
+- `freeOrdersEnabled`: Controla pedidos gratuitos
+
+## 📁 Estrutura de Arquivos
 
 ```
 temploteris/
-├── index.html              # Site principal
-├── pdfs.json              # Lista de PDFs (global)
-├── customization.json     # Personalizações (global)
+├── index.html          # Tela de abertura
+├── splash.html         # Tela de carregamento
+├── main.html           # Página principal
+├── config.json         # Configurações do site
+├── admin-settings.json # Configurações administrativas
+├── customization.json  # Personalizações
+├── pdfs.json          # Lista de PDFs
 ├── admin/
-│   ├── index.html         # Painel Netlify CMS
-│   └── config.yml         # Configuração do CMS
-└── README.md              # Este arquivo
+│   ├── config.yml     # Configuração do CMS
+│   └── index.html     # Painel admin
+└── README.md          # Documentação
 ```
 
-## 🔧 Como Usar
+## 🚀 Instalação
 
-### Para Usuários Comuns
-1. Acesse o site normalmente
-2. Veja os PDFs disponíveis
-3. Faça pedidos gratuitos ou personalizados
-4. Deixe feedback
-
-### Para Administradores
-
-#### Painel Local (apenas no seu navegador)
-1. Clique em "Login Administrador" no site
-2. Controle pedidos e mensagens
-3. **⚠️ Alterações são apenas locais**
-
-#### Painel Global (Netlify CMS - visível para todos)
-1. Acesse `/admin/` no seu site
-2. Faça login com sua conta do GitHub
-3. Edite PDFs e personalizações
-4. **✅ Alterações ficam visíveis para todos**
-
-## 🌐 Configuração no Netlify
-
-### 1. Ativar Identity e Git Gateway
-1. No painel do Netlify, vá em **Site settings** > **Identity**
-2. Clique em **Enable Identity**
-3. Vá em **Identity** > **Services** > **Git Gateway**
-4. Clique em **Enable Git Gateway**
-
-### 2. Configurar Usuários
-1. Vá em **Identity** > **Users**
-2. Clique em **Invite users**
-3. Adicione seu email
-4. Confirme o convite no email
-
-### 3. Acessar o Painel ADM
-1. Acesse `https://SEUSITE.netlify.app/admin/`
-2. Faça login com sua conta do GitHub
-3. Edite PDFs e personalizações
-
-## 📝 Como Adicionar PDFs
-
-### Via Netlify CMS (Recomendado)
-1. Acesse `/admin/`
-2. Vá em "PDFs"
-3. Clique em "New PDF"
-4. Preencha os campos:
-   - **ID**: Número único
-   - **Título**: Nome do PDF
-   - **Link**: URL do arquivo PDF
-   - **Idioma**: pt, en ou es
-   - **Categoria**: manual, guide, tutorial ou other
-   - **Data**: Data de adição (YYYY-MM-DD)
-5. Clique em "Publish"
-
-### Via Arquivo JSON (Manual)
-Edite o arquivo `pdfs.json`:
-```json
-[
-  {
-    "id": 1,
-    "title": "Nome do PDF",
-    "link": "caminho/para/arquivo.pdf",
-    "language": "pt",
-    "category": "manual",
-    "dateAdded": "2024-01-01"
-  }
-]
-```
-
-## 🎯 Personalizações
-
-### Mensagem de Boas-vindas
-Edite via Netlify CMS ou no arquivo `customization.json`:
-```json
-{
-  "welcomeMessage": "Sua mensagem personalizada aqui",
-  "siteTitle": "Título do Site"
-}
-```
-
-## 🔄 Sistema de Tradução
-
-O site suporta 3 idiomas:
-- 🇧🇷 Português (padrão)
-- 🇺🇸 Inglês
-- 🇪🇸 Espanhol
-
-Para adicionar traduções, edite o objeto `translations` no arquivo `index.html`.
-
-## 🛠️ Tecnologias
-
-- **HTML5**: Estrutura semântica
-- **CSS3**: Design moderno com animações
-- **JavaScript**: Funcionalidades dinâmicas
-- **Netlify CMS**: Administração de conteúdo
-- **GitHub Pages/Netlify**: Hospedagem
+1. Clone o repositório
+2. Abra `index.html` no navegador
+3. Configure as senhas administrativas
+4. Personalize as configurações conforme necessário
 
 ## 📞 Suporte
 
-Para dúvidas ou problemas:
-1. Verifique se o Identity e Git Gateway estão ativados no Netlify
-2. Confirme se você está logado no painel ADM
-3. Verifique se os arquivos JSON estão no formato correto
+Para dúvidas ou sugestões, entre em contato através do sistema de feedback do site.
 
 ---
 
-**Desenvolvido com ❤️ para o Canal Teris**
+**Desenvolvido com ❤️ para transformação pessoal e espiritual**
+
 
 

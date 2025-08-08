@@ -1,0 +1,22 @@
+{
+  "siteConfig": {
+    "title": "Teris | Subliminares",
+    "welcomeMessage": "Bem-vindo ao Canal Teris! Aqui você encontra tudo para sua transformação.",
+    "theme": {
+      "primaryColor": "#00ff41",
+      "secondaryColor": "#00cc33",
+      "backgroundColor": "#000000",
+      "textColor": "#00ff41"
+    }
+  },
+  "adminSettings": {
+    "ordersEnabled": true,
+    "feedbackEnabled": true,
+    "pdfsEnabled": true,
+    "lastUpdate": "2024-01-01T00:00:00Z"
+  },
+  "realTimeUpdates": {
+    "enabled": true,
+    "updateInterval": 5000
+  }
+}

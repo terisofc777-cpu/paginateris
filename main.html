@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bem-vindo ao Templo Teris | Subliminares</title>
+      <title data-translate="site_title">Bem-vindo ao Templo Teris | Subliminares</title>
   <style>
     * {
       margin: 0;
@@ -13,18 +13,36 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #8B0000, #DC143C, #B22222, #8B0000);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease-in-out infinite;
-      color: #ffffff;
+      background: #000000;
+      color: #00ff41;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* Efeito de brilho no fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
+      animation: backgroundPulse 10s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes backgroundPulse {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+      }
     }
 
     .container {
@@ -44,43 +62,60 @@
     .header h1 {
       font-size: 4em;
       margin-bottom: 20px;
-      color: #ffffff;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      color: #00ff41;
+      text-shadow: 
+        0 0 20px #00ff41,
+        0 0 40px #00ff41,
+        0 0 60px #00ff41;
       animation: glow 2s ease-in-out infinite alternate;
+      letter-spacing: 2px;
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
-      to { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 50px rgba(220, 20, 60, 0.3); }
+      from { 
+        text-shadow: 
+          0 0 20px #00ff41,
+          0 0 40px #00ff41,
+          0 0 60px #00ff41;
+      }
+      to { 
+        text-shadow: 
+          0 0 30px #00ff41,
+          0 0 50px #00ff41,
+          0 0 70px #00ff41,
+          0 0 90px #00ff41;
+      }
     }
 
     .header p {
       font-size: 1.5em;
       opacity: 0.9;
       margin-bottom: 20px;
-      color: #ffffff;
+      color: #00cc33;
     }
 
     /* Admin Tab System */
     .admin-tab-container {
-      background: rgba(139, 0, 0, 0.9);
-      border: 2px solid #ffffff;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
       border-radius: 15px;
       margin-bottom: 30px;
       overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
     }
 
     .admin-tab-header {
-      background: linear-gradient(45deg, #8B0000, #DC143C);
+      background: linear-gradient(45deg, #00ff41, #00cc33);
       padding: 15px;
       text-align: center;
-      border-bottom: 2px solid #ffffff;
+      border-bottom: 2px solid #00ff41;
     }
 
     .admin-tab-header h3 {
-      color: #ffffff;
+      color: #000000;
       font-size: 1.3em;
       margin: 0;
+      font-weight: bold;
     }
 
     .admin-tab-content {
@@ -94,7 +129,7 @@
     }
 
     .admin-warning {
-      color: #ffffff;
+      color: #00ff41;
       font-weight: bold;
       margin-bottom: 15px;
       font-size: 1.1em;
@@ -110,19 +145,19 @@
 
     .admin-form input {
       padding: 10px 15px;
-      border: 2px solid #ffffff;
+      border: 2px solid #00ff41;
       border-radius: 8px;
       background: rgba(0, 0, 0, 0.7);
-      color: #ffffff;
+      color: #00ff41;
       font-size: 16px;
     }
 
     .admin-form button {
       padding: 10px 20px;
-      background: linear-gradient(45deg, #DC143C, #8B0000);
-      border: 2px solid #ffffff;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      border: 2px solid #00ff41;
       border-radius: 8px;
-      color: #ffffff;
+      color: #000000;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -130,7 +165,7 @@
 
     .admin-form button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
     }
 
     /* Admin Controls */
@@ -142,10 +177,10 @@
 
     .admin-controls button {
       padding: 12px 20px;
-      background: linear-gradient(45deg, #DC143C, #8B0000);
-      border: 2px solid #ffffff;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      border: 2px solid #00ff41;
       border-radius: 8px;
-      color: #ffffff;
+      color: #000000;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -153,15 +188,17 @@
 
     .admin-controls button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
     }
 
     .admin-controls button.danger {
-      background: linear-gradient(45deg, #8B0000, #4B0082);
+      background: linear-gradient(45deg, #ff4444, #cc0000);
+      color: #ffffff;
     }
 
     .admin-controls button.success {
-      background: linear-gradient(45deg, #228B22, #006400);
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      color: #000000;
     }
 
     /* Language Selector */
@@ -172,31 +209,31 @@
 
     .language-selector select {
       padding: 10px 20px;
-      background: rgba(139, 0, 0, 0.8);
-      border: 2px solid #ffffff;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
       border-radius: 8px;
-      color: #ffffff;
+      color: #00ff41;
       font-size: 16px;
       cursor: pointer;
     }
 
     /* Sections */
     .section {
-      background: rgba(139, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(15px);
-      border: 2px solid #ffffff;
+      border: 2px solid #00ff41;
       border-radius: 15px;
       padding: 30px;
       margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
     }
 
     .section h2 {
-      color: #ffffff;
+      color: #00ff41;
       text-align: center;
       margin-bottom: 25px;
       font-size: 2.2em;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
     }
 
     /* PDFs Section */
@@ -209,7 +246,7 @@
 
     .pdf-card {
       background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #ffffff;
+      border: 2px solid #00ff41;
       border-radius: 12px;
       padding: 20px;
       transition: all 0.3s ease;
@@ -218,12 +255,12 @@
 
     .pdf-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-      border-color: #DC143C;
+      box-shadow: 0 10px 25px rgba(0, 255, 65, 0.3);
+      border-color: #00cc33;
     }
 
     .pdf-card h3 {
-      color: #ffffff;
+      color: #00ff41;
       margin-bottom: 10px;
       font-size: 1.3em;
     }
@@ -231,23 +268,24 @@
     .pdf-card p {
       margin-bottom: 15px;
       opacity: 0.9;
+      color: #00cc33;
     }
 
     .pdf-card a {
       display: inline-block;
       padding: 10px 20px;
-      background: linear-gradient(45deg, #DC143C, #8B0000);
-      color: #ffffff;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      color: #000000;
       text-decoration: none;
       border-radius: 8px;
       font-weight: bold;
       transition: all 0.3s ease;
-      border: 1px solid #ffffff;
+      border: 1px solid #00ff41;
     }
 
     .pdf-card a:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
     }
 
     .pdf-actions {
@@ -277,8 +315,8 @@
     }
 
     .pdf-download {
-      background: linear-gradient(45deg, #DC143C, #8B0000);
-      color: white;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      color: #000000;
     }
 
     .pdf-btn:hover {
@@ -289,13 +327,13 @@
     .pdf-category {
       display: inline-block;
       padding: 5px 12px;
-      background: linear-gradient(45deg, #8B0000, #4B0082);
+      background: linear-gradient(45deg, #00ff41, #00cc33);
       border-radius: 15px;
       font-size: 0.9em;
       font-weight: bold;
       margin-bottom: 10px;
-      color: #ffffff;
-      border: 1px solid #ffffff;
+      color: #000000;
+      border: 1px solid #00ff41;
     }
 
     .pdf-date {
@@ -336,10 +374,10 @@
     .submit-btn {
       width: 100%;
       padding: 15px;
-      background: linear-gradient(45deg, #DC143C, #8B0000);
-      border: 2px solid #ffffff;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      border: 2px solid #00ff41;
       border-radius: 8px;
-      color: #ffffff;
+      color: #000000;
       font-size: 1.1em;
       font-weight: bold;
       cursor: pointer;
@@ -348,7 +386,7 @@
 
     .submit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 20px rgba(0, 255, 65, 0.3);
     }
 
     .submit-btn:disabled {
@@ -452,8 +490,8 @@
 
     .package-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-      border-color: #DC143C;
+      box-shadow: 0 10px 25px rgba(0, 255, 65, 0.3);
+      border-color: #00ff41;
     }
 
     .package-card h3 {
@@ -479,7 +517,7 @@
 
     .package-card li:before {
       content: '•';
-      color: #DC143C;
+      color: #00ff41;
       font-weight: bold;
       position: absolute;
       left: 0;
@@ -513,7 +551,7 @@
 
     .order-instructions li:before {
       content: '→';
-      color: #DC143C;
+      color: #00ff41;
       position: absolute;
       left: 0;
       font-weight: bold;
@@ -547,7 +585,7 @@
 
     .manual-features .features-list li:before {
       content: '•';
-      color: #DC143C;
+      color: #00ff41;
       position: absolute;
       left: 0;
       font-size: 1.2em;
@@ -710,6 +748,12 @@
       color: #ffffff;
       border: 1px solid #ffffff;
     }
+    
+    .status-partial {
+      background: linear-gradient(45deg, #ffaa00, #ff8800);
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
 
     /* PDF Management */
     .pdf-management {
@@ -773,6 +817,289 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
+    /* Notifications */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: #000000;
+      font-weight: bold;
+      z-index: 1000;
+      animation: slideIn 0.3s ease-out;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .notification.success {
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      border: 2px solid #00ff41;
+    }
+
+    .notification.error {
+      background: linear-gradient(45deg, #ff4444, #cc0000);
+      border: 2px solid #ff4444;
+      color: #ffffff;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Status indicators */
+    .status-indicator {
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      text-align: center;
+      margin: 15px 0;
+      border: 2px solid;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      font-size: 1.1em;
+    }
+
+    .status-accepting {
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      color: #000000;
+      border-color: #00ff41;
+      box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+    }
+
+    .status-not-accepting {
+      background: linear-gradient(45deg, #ff4444, #cc0000);
+      color: #ffffff;
+      border-color: #ff4444;
+      box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+    }
+
+    /* Enhanced package cards */
+    .package-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .package-card:hover::before {
+      left: 100%;
+    }
+
+    .package-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 255, 65, 0.4);
+      border-color: #00cc33;
+    }
+
+    .package-card h3 {
+      color: #00ff41;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.5em;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    .package-card ul {
+      list-style: none;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .package-card li {
+      color: #00cc33;
+      margin-bottom: 12px;
+      padding-left: 25px;
+      position: relative;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    .package-card li:hover {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .package-card li:before {
+      content: '✦';
+      color: #00ff41;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
+      text-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
+    }
+
+    /* Enhanced manual announcement */
+    .manual-announcement {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manual-announcement::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .manual-description {
+      position: relative;
+      z-index: 1;
+    }
+
+    .manual-features {
+      background: rgba(0, 255, 65, 0.1);
+      border: 1px solid rgba(0, 255, 65, 0.3);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+    }
+
+    .features-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features-list li {
+      color: #00cc33;
+      margin-bottom: 12px;
+      padding-left: 30px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .features-list li:hover {
+      transform: translateX(5px);
+      color: #00ff41;
+    }
+
+    .features-list li:before {
+      content: '⚡';
+      color: #00ff41;
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
+      text-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
+    }
+
+    /* Enhanced contact cards */
+    .contact-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .contact-card:hover::before {
+      left: 100%;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 255, 65, 0.4);
+      border-color: #00cc33;
+    }
+
+    .contact-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .contact-card h4 {
+      color: #00ff41;
+      margin-bottom: 10px;
+      font-size: 1.3em;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+
+    .contact-card p {
+      color: #00cc33;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #00ff41, #00cc33);
+      color: #000000;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid #00ff41;
+      box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 255, 65, 0.5);
+      background: linear-gradient(45deg, #00cc33, #00ff41);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .header h1 {
@@ -786,6 +1113,92 @@
       .pdfs-grid {
         grid-template-columns: 1fr;
       }
+
+      .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        font-size: 0.9em;
+      }
+
+      .package-card {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .package-card h3 {
+        font-size: 1.3em;
+      }
+
+      .manual-announcement {
+        padding: 25px;
+      }
+
+      .contact-card {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .contact-icon {
+        font-size: 2.5em;
+      }
+
+      .status-indicator {
+        padding: 10px 15px;
+        font-size: 1em;
+      }
+
+      .section {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .section h2 {
+        font-size: 1.8em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2em;
+      }
+
+      .header p {
+        font-size: 1.1em;
+      }
+
+      .package-card {
+        padding: 15px;
+      }
+
+      .package-card h3 {
+        font-size: 1.2em;
+      }
+
+      .manual-announcement {
+        padding: 20px;
+      }
+
+      .contact-card {
+        padding: 15px;
+      }
+
+      .contact-icon {
+        font-size: 2em;
+      }
+
+      .section {
+        padding: 15px;
+      }
+
+      .section h2 {
+        font-size: 1.5em;
+      }
+
+      .admin-controls button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
@@ -793,7 +1206,7 @@
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <h1>Bem-vindo ao Templo Teris</h1>
+      <h1 data-translate="welcome_title">Bem-vindo ao Templo Teris</h1>
       <p data-translate="welcome_message">Subliminares para transformação pessoal</p>
     </div>
 
@@ -816,8 +1229,11 @@
         <!-- Admin Controls (Hidden until login) -->
         <div id="adminControls" style="display: none;">
           <div class="admin-controls">
-            <button onclick="toggleOrders()" id="toggleOrdersBtn" data-translate="toggle_orders">Habilitar/Desabilitar Pedidos</button>
             <button onclick="toggleFreeOrders()" id="toggleFreeOrdersBtn" data-translate="toggle_free_orders">Aceitar/Rejeitar Pedidos Gratuitos</button>
+            <button onclick="toggleCustomOrders()" id="toggleCustomOrdersBtn" data-translate="toggle_custom_orders">Aceitar/Rejeitar Encomendas Personalizadas</button>
+            <button onclick="toggleFeedback()" id="toggleFeedbackBtn" data-translate="toggle_feedback">Habilitar/Desabilitar Feedback</button>
+            <button onclick="togglePDFs()" id="togglePDFsBtn" data-translate="toggle_pdfs">Habilitar/Desabilitar PDFs</button>
+            <button onclick="resetAdminSettings()" class="success">Resetar Configurações</button>
             <button onclick="clearAllData()" class="danger" data-translate="clear_data">Limpar Todos os Dados</button>
             <button onclick="logoutAdmin()" data-translate="logout">Sair</button>
           </div>
@@ -874,7 +1290,7 @@
                   <textarea id="editFinalMessage" style="width: 100%; height: 60px;" placeholder="Mensagem final da seção..."></textarea>
                 </div>
                 <button onclick="saveComingSoon()">Salvar Alterações</button>
-                <button onclick="cancelEditComingSoon()" style="background: #8B0000; margin-left: 10px;">Cancelar</button>
+                <button onclick="cancelEditComingSoon()" style="background: #00ff41; margin-left: 10px;" data-translate="cancel_button">Cancelar</button>
               </div>
             </div>
           </div>
@@ -930,7 +1346,7 @@
                 </div>
                 
                 <button onclick="savePackageInfo()">Salvar Alterações</button>
-                <button onclick="cancelEditPackageInfo()" style="background: #8B0000; margin-left: 10px;">Cancelar</button>
+                <button onclick="cancelEditPackageInfo()" style="background: #00ff41; margin-left: 10px;" data-translate="cancel_button">Cancelar</button>
               </div>
             </div>
           </div>
@@ -957,74 +1373,74 @@
 
     <!-- Subliminal Packages Information -->
     <div class="section">
-      <h2>📌 Informações de Encomendas – Subliminares Teris</h2>
+      <h2 data-translate="orders_info_title">📌 Informações de Encomendas – Subliminares Teris</h2>
       <div class="packages-info">
-        <p id="packageIntroText" style="text-align: center; margin-bottom: 30px; font-size: 1.1em;">
+        <p id="packageIntroText" style="text-align: center; margin-bottom: 30px; font-size: 1.1em;" data-translate="package_intro">
           Você pode solicitar um subliminar personalizado com boosters energéticos, proteção e, se desejar, magia embutida.
         </p>
         
         <div class="packages-grid">
           <!-- Basic Package -->
           <div class="package-card">
-            <h3 id="basicPackageTitle">🔹 Pacote Básico – R$20</h3>
+            <h3 id="basicPackageTitle" data-translate="basic_package">🔹 Pacote Básico – R$20</h3>
             <ul id="basicPackageList">
-              <li>Até 100 afirmações</li>
-              <li>Booster energético forte (com ou sem magia, você decide)</li>
-              <li>Proteção vibracional forte</li>
-              <li>Edição básica</li>
-              <li>Música à sua escolha ou deixe comigo</li>
+              <li data-translate="basic_feature_1">Até 100 afirmações</li>
+              <li data-translate="basic_feature_2">Booster energético forte (com ou sem magia, você decide)</li>
+              <li data-translate="basic_feature_3">Proteção vibracional forte</li>
+              <li data-translate="basic_feature_4">Edição básica</li>
+              <li data-translate="basic_feature_5">Música à sua escolha ou deixe comigo</li>
             </ul>
           </div>
 
           <!-- Intermediate Package -->
           <div class="package-card">
-            <h3 id="intermediatePackageTitle">🔸 Pacote Intermediário – R$30</h3>
+            <h3 id="intermediatePackageTitle" data-translate="intermediate_package">🔸 Pacote Intermediário – R$30</h3>
             <ul id="intermediatePackageList">
-              <li>Até 200 afirmações</li>
-              <li>Booster energético forte (com ou sem magia, você decide)</li>
-              <li>Proteção energética forte</li>
-              <li>Frequência vibracional opcional (ex: 432Hz, 528Hz)</li>
-              <li>Edição mais equilibrada</li>
-              <li>Música personalizada conforme o tema</li>
+              <li data-translate="intermediate_feature_1">Até 200 afirmações</li>
+              <li data-translate="intermediate_feature_2">Booster energético forte (com ou sem magia, você decide)</li>
+              <li data-translate="intermediate_feature_3">Proteção energética forte</li>
+              <li data-translate="intermediate_feature_4">Frequência vibracional opcional (ex: 432Hz, 528Hz)</li>
+              <li data-translate="intermediate_feature_5">Edição mais equilibrada</li>
+              <li data-translate="intermediate_feature_6">Música personalizada conforme o tema</li>
             </ul>
           </div>
 
           <!-- Magic Package -->
           <div class="package-card">
-            <h3 id="magicPackageTitle">🔮 Pacote Mágico – R$77</h3>
+            <h3 id="magicPackageTitle" data-translate="magic_package">🔮 Pacote Mágico – R$77</h3>
             <ul id="magicPackageList">
-              <li>Até 300 afirmações</li>
-              <li>Booster mágico com magia</li>
-              <li>Proteção com selamento mágico</li>
-              <li>Frequência oculta espiritual</li>
-              <li>Criado em estado de transe</li>
-              <li>Edição completa com camadas mágicas</li>
-              <li>Música à sua escolha ou canalizada</li>
+              <li data-translate="magic_feature_1">Até 300 afirmações</li>
+              <li data-translate="magic_feature_2">Booster mágico com magia</li>
+              <li data-translate="magic_feature_3">Proteção com selamento mágico</li>
+              <li data-translate="magic_feature_4">Frequência oculta espiritual</li>
+              <li data-translate="magic_feature_5">Criado em estado de transe</li>
+              <li data-translate="magic_feature_6">Edição completa com camadas mágicas</li>
+              <li data-translate="magic_feature_7">Música à sua escolha ou canalizada</li>
             </ul>
           </div>
         </div>
 
         <div class="order-instructions">
-          <h3 style="color: #ffffff; margin: 30px 0 20px 0;">📤 Como fazer seu pedido:</h3>
+          <h3 style="color: #ffffff; margin: 30px 0 20px 0;" data-translate="order_instructions_title">📤 Como fazer seu pedido:</h3>
           <div id="orderInstructionsText">
-            <p>Após escolher o pacote, vá até a seção "Encomende Agora" e envie:</p>
+            <p data-translate="order_instructions_text">Após escolher o pacote, vá até a seção "Encomende Agora" e envie:</p>
             <ul>
-              <li>O que deseja manifestar ou transformar</li>
-              <li>Tipo de música (ou deixe comigo)</li>
-              <li>Nome desejado no título (opcional)</li>
+              <li data-translate="order_requirement_1">O que deseja manifestar ou transformar</li>
+              <li data-translate="order_requirement_2">Tipo de música (ou deixe comigo)</li>
+              <li data-translate="order_requirement_3">Nome desejado no título (opcional)</li>
             </ul>
             
             <p style="margin-top: 20px;">
-              <strong>O pagamento pode ser feito antes ou depois da entrega como quiser.</strong><br>
-              Assim que estiver pronto, você receberá o acesso ao áudio e às afirmações.
+              <strong data-translate="payment_info">O pagamento pode ser feito antes ou depois da entrega como quiser.</strong><br>
+              <span data-translate="delivery_info">Assim que estiver pronto, você receberá o acesso ao áudio e às afirmações.</span>
             </p>
           </div>
 
           <h3 style="color: #ffffff; margin: 30px 0 20px 0;">⏱ Prazo de entrega:</h3>
           <div id="deliveryTimeText">
             <ul>
-              <li>Até 2 a 4 dias úteis (em caso de muitos pedidos) após o pagamento</li>
-              <li>Se já estiver pronto, envio no mesmo dia</li>
+              <li data-translate="delivery_time_1">Até 2 a 4 dias úteis (em caso de muitos pedidos) após o pagamento</li>
+              <li data-translate="delivery_time_2">Se já estiver pronto, envio no mesmo dia</li>
             </ul>
           </div>
         </div>
@@ -1032,7 +1448,7 @@
     </div>
 
     <!-- PDFs Section -->
-    <div class="section">
+    <div class="section" id="pdfsSection">
       <h2 data-translate="available_pdfs">PDFs Disponíveis</h2>
       <div id="pdfsContainer" class="pdfs-grid">
         <!-- PDFs will be loaded here -->
@@ -1048,7 +1464,7 @@
       
       <!-- Free Orders Form -->
       <div class="order-form-section">
-        <h3 style="color: #ffffff; text-align: center; margin-bottom: 20px;">🎁 Pedidos Gratuitos (YouTube)</h3>
+        <h3 style="color: #ffffff; text-align: center; margin-bottom: 20px;" data-translate="free_orders_title">🎁 Pedidos Gratuitos (YouTube)</h3>
         <form id="freeOrderForm">
           <div class="form-group">
             <label for="freeOrderName" data-translate="full_name">Nome Completo:</label>
@@ -1079,7 +1495,7 @@
 
       <!-- Custom Orders Form -->
       <div class="order-form-section" style="margin-top: 40px;">
-        <h3 style="color: #ffffff; text-align: center; margin-bottom: 20px;">📦 Encomendas Personalizadas</h3>
+        <h3 style="color: #ffffff; text-align: center; margin-bottom: 20px;" data-translate="custom_orders_title">📦 Encomendas Personalizadas</h3>
         <form id="customOrderForm">
           <div class="form-group">
             <label for="customOrderName" data-translate="full_name">Nome Completo:</label>
@@ -1118,75 +1534,75 @@
       <h2 data-translate="coming_soon_section">📘 Em Breve</h2>
       <div class="coming-soon-content" id="comingSoonContent">
         <div class="manual-announcement">
-          <h3 style="color: #ffffff; text-align: center; margin-bottom: 30px; font-size: 2em;">
+          <h3 style="color: #ffffff; text-align: center; margin-bottom: 30px; font-size: 2em;" data-translate="coming_soon_title">
             📘 Manual Teris Completo – Em Breve Disponível para Venda
           </h3>
           
           <div class="manual-description">
-            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #ffffff;">
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #ffffff;" data-translate="not_simple_pdf">
               <strong>Este não é um simples PDF. É uma chave. Um chamado. Um portal.</strong>
             </p>
             
-            <p style="margin-bottom: 25px;">
+            <p style="margin-bottom: 25px;" data-translate="coming_soon_description">
               Com mais de 50 páginas, o Manual Teris Completo traz ensinamentos, práticas, diagnósticos espirituais, 
               contato com seres sobrenaturais, técnicas de criação de subliminares com ou sem magia, e muito mais.
             </p>
 
             <div class="manual-features">
-              <h4 style="color: #ffffff; margin: 25px 0 20px 0;">🜍 Você encontrará:</h4>
+              <h4 style="color: #ffffff; margin: 25px 0 20px 0;" data-translate="you_will_find">🜍 Você encontrará:</h4>
               <ul class="features-list">
-                <li>Técnicas avançadas de manifestação e proteção</li>
-                <li>Diagnóstico energético e desbloqueio de sombras</li>
-                <li>Conhecimento sobre entidades, arquétipos e forças ocultas</li>
-                <li>Exercícios práticos e rituais energéticos</li>
-                <li>Reflexões que vão mudar sua visão de mundo</li>
-                <li>E muito mais..</li>
+                <li data-translate="advanced_techniques">Técnicas avançadas de manifestação e proteção</li>
+                <li data-translate="energy_diagnosis">Diagnóstico energético e desbloqueio de sombras</li>
+                <li data-translate="entities_knowledge">Conhecimento sobre entidades, arquétipos e forças ocultas</li>
+                <li data-translate="practical_exercises">Exercícios práticos e rituais energéticos</li>
+                <li data-translate="reflections">Reflexões que vão mudar sua visão de mundo</li>
+                <li data-translate="and_more">E muito mais..</li>
               </ul>
             </div>
 
             <div class="manual-protection">
-              <p style="margin: 25px 0; font-weight: bold; text-align: center;">
+              <p style="margin: 25px 0; font-weight: bold; text-align: center;" data-translate="spiritual_protection">
                 🔒 Este conteúdo é protegido por leis espirituais e humanas.<br>
-                Ele foi canalizado e escrito em estado elevado de consciência.
+                <span data-translate="channeled_content">Ele foi canalizado e escrito em estado elevado de consciência.</span>
               </p>
             </div>
 
             <div class="manual-purchase">
-              <p style="text-align: center; margin: 20px 0;">
+              <p style="text-align: center; margin: 20px 0;" data-translate="direct_sale">
                 <strong>A venda será feita diretamente por mim, Teris.</strong>
               </p>
               
               <div class="price-info">
                 <p style="text-align: center; font-size: 1.3em; color: #ffffff; margin: 20px 0;">
-                  <strong>Valor estimado: R$111</strong><br>
-                  <span style="color: #DC143C; font-size: 1.1em;">Com promoção de um ciclo lunar por R$77</span>
+                  <strong data-translate="estimated_value">Valor estimado: R$111</strong><br>
+                  <span style="color: #00ff41; font-size: 1.1em;" data-translate="promo_price">Com promoção de um ciclo lunar por R$77</span>
                 </p>
-                <p style="text-align: center; margin-bottom: 25px;">
+                <p style="text-align: center; margin-bottom: 25px;" data-translate="manual_delivery">
                   📩 Entrega será feita manualmente para cada pessoa.
                 </p>
               </div>
 
               <div class="purchase-process">
-                <h4 style="color: #ffffff; margin: 25px 0 15px 0;">Como será o processo de compra:</h4>
-                <div class="payment-info" id="paymentInfo" style="background: rgba(220, 20, 60, 0.2); border: 1px solid #DC143C; border-radius: 10px; padding: 20px; margin: 15px 0;">
-                  <p style="text-align: center; font-weight: bold; color: #ffffff; margin-bottom: 10px;">📱 Chave PIX:</p>
-                  <p style="text-align: center; font-size: 1.1em; color: #ffffff; margin-bottom: 15px;" id="pixKeyDisplay">teris.ofc777@gmail.com</p>
-                  <p style="text-align: center; font-weight: bold; color: #ffffff; margin-bottom: 10px;">📧 Email para Comprovante:</p>
-                  <p style="text-align: center; font-size: 1.1em; color: #ffffff;" id="contactEmailDisplay">teris.ofc777@gmail.com</p>
+                <h4 style="color: #ffffff; margin: 25px 0 15px 0;" data-translate="purchase_process_title">Como será o processo de compra:</h4>
+                <div class="payment-info" id="paymentInfo" style="background: rgba(0, 255, 65, 0.1); border: 1px solid #00ff41; border-radius: 10px; padding: 20px; margin: 15px 0;">
+                                      <p style="text-align: center; font-weight: bold; color: #ffffff; margin-bottom: 10px;" data-translate="pix_key_title">📱 Chave PIX:</p>
+                    <p style="text-align: center; font-size: 1.1em; color: #ffffff; margin-bottom: 15px;" id="pixKeyDisplay">teris.ofc777@gmail.com</p>
+                    <p style="text-align: center; font-weight: bold; color: #ffffff; margin-bottom: 10px;" data-translate="email_contact_title">📧 Email para Comprovante:</p>
+                    <p style="text-align: center; font-size: 1.1em; color: #ffffff;" id="contactEmailDisplay">teris.ofc777@gmail.com</p>
                 </div>
                 <ol class="process-steps">
-                  <li>Você faz o pagamento por Pix usando a chave acima</li>
-                  <li>Envia o comprovante e seu e-mail para o email indicado</li>
-                  <li>Eu envio o PDF diretamente pra você, por e-mail ou Google Drive</li>
+                  <li data-translate="payment_step1">Você faz o pagamento por Pix usando a chave acima</li>
+                  <li data-translate="payment_step2">Envia o comprovante e seu e-mail para o email indicado</li>
+                  <li data-translate="payment_step3">Eu envio o PDF diretamente pra você, por e-mail ou Google Drive</li>
                 </ol>
               </div>
 
               <div class="manual-special">
                 <p style="text-align: center; margin: 25px 0;">
-                  🕯 Cada cópia será pessoal, marcada energeticamente.<br>
-                  ⏳ <strong>Lançamento previsto para: 07/08/2025 a 07/10/2025</strong>
+                  <span data-translate="personal_copy">🕯 Cada cópia será pessoal, marcada energeticamente.</span><br>
+                  ⏳ <strong data-translate="release_date">Lançamento previsto para: 07/08/2025 a 07/10/2025</strong>
                 </p>
-                <p style="text-align: center; font-size: 1.2em; color: #ffffff; font-weight: bold;">
+                <p style="text-align: center; font-size: 1.2em; color: #ffffff; font-weight: bold;" data-translate="stay_alert">
                   Fique atento(a). O templo vai chamar.
                 </p>
               </div>
@@ -1201,15 +1617,15 @@
       <h2 data-translate="about_section">📞 Sobre & Contatos</h2>
       <div class="about-content">
         <div class="contact-info">
-          <h3 style="color: #ffffff; text-align: center; margin-bottom: 30px;">Entre em contato comigo:</h3>
+          <h3 style="color: #ffffff; text-align: center; margin-bottom: 30px;" data-translate="contact_title">Entre em contato comigo:</h3>
           
           <div class="contact-grid">
             <!-- Email Contact -->
             <div class="contact-card">
               <div class="contact-icon">📧</div>
-              <h4>Email</h4>
+              <h4 data-translate="email_label">Email</h4>
               <p>teris.ofc777@gmail.com</p>
-              <a href="mailto:teris.ofc777@gmail.com" class="contact-btn">Enviar Email</a>
+              <a href="mailto:teris.ofc777@gmail.com" class="contact-btn" data-translate="send_email">Enviar Email</a>
             </div>
 
             <!-- Amino Contact -->
@@ -1230,7 +1646,7 @@
           </div>
 
           <div class="about-text">
-            <p style="text-align: center; margin-top: 30px; font-size: 1.1em; color: #ffffff;">
+            <p style="text-align: center; margin-top: 30px; font-size: 1.1em; color: #ffffff;" data-translate="contact_message">
               Sinta-se à vontade para entrar em contato comigo através de qualquer um desses canais. 
               Estou sempre disponível para ajudar com seus pedidos de subliminares e esclarecer dúvidas!
             </p>
@@ -1240,7 +1656,7 @@
     </div>
 
     <!-- Feedback Section -->
-    <div class="section">
+    <div class="section" id="feedbackSection">
       <h2 data-translate="feedback">Feedback</h2>
       <form id="feedbackForm">
         <div class="form-group">
@@ -1266,13 +1682,15 @@
     
     // Translation data
     const translations = {
-      pt: {
+              pt: {
         welcome_message: 'Subliminares para transformação pessoal',
           admin_warning: '⚠️ Área Administrativa - Acesso Restrito',
           admin_login: 'Login Administrador',
           admin_panel: '🔐 Painel Administrativo',
-          toggle_orders: 'Habilitar/Desabilitar Pedidos',
           toggle_free_orders: 'Aceitar/Rejeitar Pedidos Gratuitos',
+          toggle_custom_orders: 'Aceitar/Rejeitar Encomendas Personalizadas',
+          toggle_feedback: 'Habilitar/Desabilitar Feedback',
+          toggle_pdfs: 'Habilitar/Desabilitar PDFs',
           clear_data: 'Limpar Todos os Dados',
           logout: 'Sair',
           pdf_management: 'Gerenciar PDFs',
@@ -1281,9 +1699,9 @@
           package_management: 'Gerenciar Informações de Encomendas',
           orders_management: 'Gerenciar Pedidos',
           available_pdfs: 'PDFs Disponíveis',
-        guides: 'Guias',
+          guides: 'Guias',
           make_order: 'Fazer Pedido',
-          full_name: 'Nome Completo:',
+          full_name: 'Como devo te chamar?',
           email: 'Email:',
           order_type: 'Tipo de Pedido:',
           select_option: 'Selecione uma opção',
@@ -1311,15 +1729,105 @@
           send_feedback: 'Enviar Feedback',
           portuguese: 'Português',
           english: 'English',
-          spanish: 'Español'
+          spanish: 'Español',
+          free_orders_accepting: 'Pedidos gratuitos aceitando',
+          free_orders_rejecting: 'Pedidos gratuitos rejeitando',
+          custom_orders_accepting: 'Encomendas personalizadas aceitando',
+          custom_orders_rejecting: 'Encomendas personalizadas rejeitando',
+          feedback_enabled: 'Feedback habilitado',
+          feedback_disabled: 'Feedback desabilitado',
+          pdfs_enabled: 'PDFs habilitados',
+          pdfs_disabled: 'PDFs desabilitados',
+          coming_soon_title: 'Manual Teris Completo – Em Breve Disponível para Venda',
+          coming_soon_description: 'Com mais de 50 páginas, o Manual Teris Completo traz ensinamentos, práticas, diagnósticos espirituais, contato com seres sobrenaturais, técnicas de criação de subliminares com ou sem magia, e muito mais.',
+          orders_info_title: '📌 Informações de Encomendas – Subliminares Teris',
+          orders_info_btn: '📌 Informações de Encomendas',
+          purchase_process_title: 'Como será o processo de compra:',
+          payment_step1: 'Você faz o pagamento por Pix usando a chave acima',
+          payment_step2: 'Envia o comprovante e seu e-mail para o email indicado',
+          payment_step3: 'Eu envio o PDF diretamente pra você, por e-mail ou Google Drive',
+          pix_key_title: '📱 Chave PIX:',
+          email_contact_title: '📧 Email para Comprovante:',
+          estimated_value: 'Valor estimado: R$111',
+          promo_price: 'Com promoção de um ciclo lunar por R$77',
+          manual_delivery: '📩 Entrega será feita manualmente para cada pessoa.',
+          personal_copy: '🕯 Cada cópia será pessoal, marcada energeticamente.',
+          release_date: '⏳ Lançamento previsto para: 07/08/2025 a 07/10/2025',
+          stay_alert: 'Fique atento(a). O templo vai chamar.',
+          not_simple_pdf: 'Este não é um simples PDF. É uma chave. Um chamado. Um portal.',
+          you_will_find: '🜍 Você encontrará:',
+          advanced_techniques: 'Técnicas avançadas de manifestação e proteção',
+          energy_diagnosis: 'Diagnóstico energético e desbloqueio de sombras',
+          entities_knowledge: 'Conhecimento sobre entidades, arquétipos e forças ocultas',
+          practical_exercises: 'Exercícios práticos e rituais energéticos',
+          reflections: 'Reflexões que vão mudar sua visão de mundo',
+          and_more: 'E muito mais..',
+          spiritual_protection: '🔒 Este conteúdo é protegido por leis espirituais e humanas.',
+          channeled_content: 'Ele foi canalizado e escrito em estado elevado de consciência.',
+          direct_sale: 'A venda será feita diretamente por mim, Teris.',
+          welcome_title: 'Bem-vindo ao Templo Teris',
+          site_title: 'Bem-vindo ao Templo Teris | Subliminares',
+          contact_title: 'Entre em contato comigo:',
+          email_label: 'Email',
+          send_email: 'Enviar Email',
+          whatsapp_label: 'WhatsApp',
+          send_whatsapp: 'Enviar WhatsApp',
+          instagram_label: 'Instagram',
+          follow_instagram: 'Seguir no Instagram',
+          youtube_label: 'YouTube',
+          subscribe_youtube: 'Inscrever-se no YouTube',
+          package_intro: 'Você pode solicitar um subliminar personalizado com boosters energéticos, proteção e, se desejar, magia embutida.',
+          basic_package: '🔹 Pacote Básico – R$20',
+          intermediate_package: '🔸 Pacote Intermediário – R$30',
+          magic_package: '🔮 Pacote Mágico – R$77',
+          basic_features: ['Até 100 afirmações', 'Booster energético forte (com ou sem magia, você decide)', 'Proteção vibracional forte', 'Edição básica', 'Música à sua escolha ou deixe comigo'],
+          intermediate_features: ['Até 200 afirmações', 'Booster energético forte (com ou sem magia, você decide)', 'Proteção energética forte', 'Frequência vibracional opcional (ex: 432Hz, 528Hz)', 'Edição mais equilibrada', 'Música personalizada conforme o tema'],
+          magic_features: ['Até 300 afirmações', 'Booster mágico com magia', 'Proteção com selamento mágico', 'Frequência oculta espiritual', 'Criado em estado de transe', 'Edição completa com camadas mágicas', 'Música à sua escolha ou canalizada'],
+          order_instructions_title: '📤 Como fazer seu pedido:',
+          order_instructions_text: 'Após escolher o pacote, vá até a seção "Encomende Agora" e envie:',
+          order_requirements: ['O que deseja manifestar ou transformar', 'Tipo de música (ou deixe comigo)', 'Nome desejado no título (opcional)'],
+          payment_info: 'O pagamento pode ser feito antes ou depois da entrega como quiser.',
+          delivery_info: 'Assim que estiver pronto, você receberá o acesso ao áudio e às afirmações.',
+          delivery_time_title: '⏱ Prazo de entrega:',
+          delivery_time_items: ['Até 2 a 4 dias úteis (em caso de muitos pedidos) após o pagamento', 'Se já estiver pronto, envio no mesmo dia'],
+          cancel_button: 'Cancelar',
+          delete_button: 'Excluir',
+          contact_message: 'Sinta-se à vontade para entrar em contato comigo através de qualquer um desses canais. Estou sempre disponível para ajudar com seus pedidos de subliminares e esclarecer dúvidas!',
+          custom_orders_title: '📦 Encomendas Personalizadas',
+          free_orders_title: '🎁 Pedidos Gratuitos (YouTube)',
+          basic_feature_1: 'Até 100 afirmações',
+          basic_feature_2: 'Booster energético forte (com ou sem magia, você decide)',
+          basic_feature_3: 'Proteção vibracional forte',
+          basic_feature_4: 'Edição básica',
+          basic_feature_5: 'Música à sua escolha ou deixe comigo',
+          intermediate_feature_1: 'Até 200 afirmações',
+          intermediate_feature_2: 'Booster energético forte (com ou sem magia, você decide)',
+          intermediate_feature_3: 'Proteção energética forte',
+          intermediate_feature_4: 'Frequência vibracional opcional (ex: 432Hz, 528Hz)',
+          intermediate_feature_5: 'Edição mais equilibrada',
+          intermediate_feature_6: 'Música personalizada conforme o tema',
+          magic_feature_1: 'Até 300 afirmações',
+          magic_feature_2: 'Booster mágico com magia',
+          magic_feature_3: 'Proteção com selamento mágico',
+          magic_feature_4: 'Frequência oculta espiritual',
+          magic_feature_5: 'Criado em estado de transe',
+          magic_feature_6: 'Edição completa com camadas mágicas',
+          magic_feature_7: 'Música à sua escolha ou canalizada',
+          order_requirement_1: 'O que deseja manifestar ou transformar',
+          order_requirement_2: 'Tipo de música (ou deixe comigo)',
+          order_requirement_3: 'Nome desejado no título (opcional)',
+          delivery_time_1: 'Até 2 a 4 dias úteis (em caso de muitos pedidos) após o pagamento',
+          delivery_time_2: 'Se já estiver pronto, envio no mesmo dia'
         },
               en: {
           welcome_message: 'Subliminals for personal transformation',
           admin_warning: '⚠️ Administrative Area - Restricted Access',
           admin_login: 'Admin Login',
           admin_panel: '🔐 Administrative Panel',
-          toggle_orders: 'Enable/Disable Orders',
           toggle_free_orders: 'Accept/Reject Free Orders',
+          toggle_custom_orders: 'Accept/Reject Custom Orders',
+          toggle_feedback: 'Enable/Disable Feedback',
+          toggle_pdfs: 'Enable/Disable PDFs',
           clear_data: 'Clear All Data',
           logout: 'Logout',
           pdf_management: 'Manage PDFs',
@@ -1328,9 +1836,9 @@
           package_management: 'Manage Package Information',
           orders_management: 'Manage Orders',
           available_pdfs: 'Available PDFs',
-        guides: 'Guides',
+          guides: 'Guides',
           make_order: 'Place Order',
-          full_name: 'Full Name:',
+          full_name: 'What should I call you?',
           email: 'Email:',
           order_type: 'Order Type:',
           select_option: 'Select an option',
@@ -1358,15 +1866,105 @@
           send_feedback: 'Send Feedback',
           portuguese: 'Português',
           english: 'English',
-          spanish: 'Español'
+          spanish: 'Español',
+          free_orders_accepting: 'Free orders accepting',
+          free_orders_rejecting: 'Free orders rejecting',
+          custom_orders_accepting: 'Custom orders accepting',
+          custom_orders_rejecting: 'Custom orders rejecting',
+          feedback_enabled: 'Feedback enabled',
+          feedback_disabled: 'Feedback disabled',
+          pdfs_enabled: 'PDFs enabled',
+          pdfs_disabled: 'PDFs disabled',
+          coming_soon_title: 'Complete Teris Manual – Coming Soon Available for Sale',
+          coming_soon_description: 'With over 50 pages, the Complete Teris Manual brings teachings, practices, spiritual diagnostics, contact with supernatural beings, techniques for creating subliminals with or without magic, and much more.',
+          orders_info_title: '📌 Order Information – Teris Subliminals',
+          orders_info_btn: '📌 Order Information',
+          purchase_process_title: 'How will the purchase process be:',
+          payment_step1: 'You make the payment via Pix using the key above',
+          payment_step2: 'Send the receipt and your email to the indicated email',
+          payment_step3: 'I send the PDF directly to you, by email or Google Drive',
+          pix_key_title: '📱 Pix Key:',
+          email_contact_title: '📧 Email for Receipt:',
+          estimated_value: 'Estimated value: R$111',
+          promo_price: 'With lunar cycle promotion for R$77',
+          manual_delivery: '📩 Delivery will be done manually for each person.',
+          personal_copy: '🕯 Each copy will be personal, energetically marked.',
+          release_date: '⏳ Expected release: 07/08/2025 to 07/10/2025',
+          stay_alert: 'Stay alert. The temple will call.',
+          not_simple_pdf: 'This is not a simple PDF. It is a key. A call. A portal.',
+          you_will_find: '🜍 You will find:',
+          advanced_techniques: 'Advanced manifestation and protection techniques',
+          energy_diagnosis: 'Energy diagnosis and shadow unlocking',
+          entities_knowledge: 'Knowledge about entities, archetypes and occult forces',
+          practical_exercises: 'Practical exercises and energy rituals',
+          reflections: 'Reflections that will change your worldview',
+          and_more: 'And much more..',
+          spiritual_protection: '🔒 This content is protected by spiritual and human laws.',
+          channeled_content: 'It was channeled and written in an elevated state of consciousness.',
+          direct_sale: 'The sale will be made directly by me, Teris.',
+          welcome_title: 'Welcome to Teris Temple',
+          site_title: 'Welcome to Teris Temple | Subliminals',
+          contact_title: 'Get in touch with me:',
+          email_label: 'Email',
+          send_email: 'Send Email',
+          whatsapp_label: 'WhatsApp',
+          send_whatsapp: 'Send WhatsApp',
+          instagram_label: 'Instagram',
+          follow_instagram: 'Follow on Instagram',
+          youtube_label: 'YouTube',
+          subscribe_youtube: 'Subscribe to YouTube',
+          package_intro: 'You can request a personalized subliminal with energy boosters, protection and, if desired, embedded magic.',
+          basic_package: '🔹 Basic Package – R$20',
+          intermediate_package: '🔸 Intermediate Package – R$30',
+          magic_package: '🔮 Magic Package – R$77',
+          basic_features: ['Up to 100 affirmations', 'Strong energy booster (with or without magic, you decide)', 'Strong vibrational protection', 'Basic editing', 'Music of your choice or leave it to me'],
+          intermediate_features: ['Up to 200 affirmations', 'Strong energy booster (with or without magic, you decide)', 'Strong energy protection', 'Optional vibrational frequency (e.g., 432Hz, 528Hz)', 'More balanced editing', 'Personalized music according to theme'],
+          magic_features: ['Up to 300 affirmations', 'Magic booster with magic', 'Protection with magical sealing', 'Spiritual occult frequency', 'Created in trance state', 'Complete editing with magical layers', 'Music of your choice or channeled'],
+          order_instructions_title: '📤 How to place your order:',
+          order_instructions_text: 'After choosing the package, go to the "Order Now" section and send:',
+          order_requirements: ['What you want to manifest or transform', 'Type of music (or leave it to me)', 'Desired name in title (optional)'],
+          payment_info: 'Payment can be made before or after delivery as you prefer.',
+          delivery_info: 'Once ready, you will receive access to the audio and affirmations.',
+          delivery_time_title: '⏱ Delivery time:',
+          delivery_time_items: ['Up to 2 to 4 business days (in case of many orders) after payment', 'If already ready, I send it the same day'],
+          cancel_button: 'Cancel',
+          delete_button: 'Delete',
+          contact_message: 'Feel free to contact me through any of these channels. I am always available to help with your subliminal orders and clarify any questions!',
+          custom_orders_title: '📦 Custom Orders',
+          free_orders_title: '🎁 Free Orders (YouTube)',
+          basic_feature_1: 'Up to 100 affirmations',
+          basic_feature_2: 'Strong energy booster (with or without magic, you decide)',
+          basic_feature_3: 'Strong vibrational protection',
+          basic_feature_4: 'Basic editing',
+          basic_feature_5: 'Music of your choice or leave it to me',
+          intermediate_feature_1: 'Up to 200 affirmations',
+          intermediate_feature_2: 'Strong energy booster (with or without magic, you decide)',
+          intermediate_feature_3: 'Strong energy protection',
+          intermediate_feature_4: 'Optional vibrational frequency (e.g., 432Hz, 528Hz)',
+          intermediate_feature_5: 'More balanced editing',
+          intermediate_feature_6: 'Personalized music according to theme',
+          magic_feature_1: 'Up to 300 affirmations',
+          magic_feature_2: 'Magic booster with magic',
+          magic_feature_3: 'Protection with magical sealing',
+          magic_feature_4: 'Spiritual occult frequency',
+          magic_feature_5: 'Created in trance state',
+          magic_feature_6: 'Complete editing with magical layers',
+          magic_feature_7: 'Music of your choice or channeled',
+          order_requirement_1: 'What you want to manifest or transform',
+          order_requirement_2: 'Type of music (or leave it to me)',
+          order_requirement_3: 'Desired name in title (optional)',
+          delivery_time_1: 'Up to 2 to 4 business days (in case of many orders) after payment',
+          delivery_time_2: 'If already ready, I send it the same day'
         },
               es: {
           welcome_message: 'Subliminales para transformación personal',
           admin_warning: '⚠️ Área Administrativa - Acceso Restringido',
           admin_login: 'Iniciar Sesión Admin',
           admin_panel: '🔐 Panel Administrativo',
-          toggle_orders: 'Habilitar/Deshabilitar Pedidos',
           toggle_free_orders: 'Aceptar/Rechazar Pedidos Gratuitos',
+          toggle_custom_orders: 'Aceptar/Rechazar Pedidos Personalizados',
+          toggle_feedback: 'Habilitar/Deshabilitar Feedback',
+          toggle_pdfs: 'Habilitar/Deshabilitar PDFs',
           clear_data: 'Limpiar Todos los Datos',
           logout: 'Cerrar Sesión',
           pdf_management: 'Gestionar PDFs',
@@ -1375,9 +1973,9 @@
           package_management: 'Gestionar Información de Paquetes',
           orders_management: 'Gestionar Pedidos',
           available_pdfs: 'PDFs Disponibles',
-        guides: 'Guías',
+          guides: 'Guías',
           make_order: 'Hacer Pedido',
-          full_name: 'Nombre Completo:',
+          full_name: '¿Cómo debo llamarte?',
           email: 'Email:',
           order_type: 'Tipo de Pedido:',
           select_option: 'Selecciona una opción',
@@ -1405,7 +2003,95 @@
           send_feedback: 'Enviar Comentario',
           portuguese: 'Português',
           english: 'English',
-          spanish: 'Español'
+          spanish: 'Español',
+          free_orders_accepting: 'Pedidos gratuitos aceptando',
+          free_orders_rejecting: 'Pedidos gratuitos rechazando',
+          custom_orders_accepting: 'Pedidos personalizados aceptando',
+          custom_orders_rejecting: 'Pedidos personalizados rechazando',
+          feedback_enabled: 'Comentarios habilitados',
+          feedback_disabled: 'Comentarios deshabilitados',
+          pdfs_enabled: 'PDFs habilitados',
+          pdfs_disabled: 'PDFs deshabilitados',
+          coming_soon_title: 'Manual Teris Completo – Próximamente Disponible para Venta',
+          coming_soon_description: 'Con más de 50 páginas, el Manual Teris Completo trae enseñanzas, prácticas, diagnósticos espirituales, contacto con seres sobrenaturales, técnicas de creación de subliminales con o sin magia, y mucho más.',
+          orders_info_title: '📌 Información de Pedidos – Subliminales Teris',
+          orders_info_btn: '📌 Información de Pedidos',
+          purchase_process_title: '¿Cómo será el proceso de compra:',
+          payment_step1: 'Haces el pago por Pix usando la clave de arriba',
+          payment_step2: 'Envías el comprobante y tu email al email indicado',
+          payment_step3: 'Te envío el PDF directamente, por email o Google Drive',
+          pix_key_title: '📱 Clave Pix:',
+          email_contact_title: '📧 Email para Comprobante:',
+          estimated_value: 'Valor estimado: R$111',
+          promo_price: 'Con promoción de ciclo lunar por R$77',
+          manual_delivery: '📩 La entrega será hecha manualmente para cada persona.',
+          personal_copy: '🕯 Cada copia será personal, marcada energéticamente.',
+          release_date: '⏳ Lanzamiento previsto para: 07/08/2025 a 07/10/2025',
+          stay_alert: 'Mantente atento(a). El templo va a llamar.',
+          not_simple_pdf: 'Este no es un simple PDF. Es una llave. Una llamada. Un portal.',
+          you_will_find: '🜍 Encontrarás:',
+          advanced_techniques: 'Técnicas avanzadas de manifestación y protección',
+          energy_diagnosis: 'Diagnóstico energético y desbloqueo de sombras',
+          entities_knowledge: 'Conocimiento sobre entidades, arquetipos y fuerzas ocultas',
+          practical_exercises: 'Ejercicios prácticos y rituales energéticos',
+          reflections: 'Reflexiones que van a cambiar tu visión del mundo',
+          and_more: 'Y mucho más..',
+          spiritual_protection: '🔒 Este contenido está protegido por leyes espirituales y humanas.',
+          channeled_content: 'Fue canalizado y escrito en estado elevado de consciencia.',
+          direct_sale: 'La venta será hecha directamente por mí, Teris.',
+          welcome_title: 'Bienvenido al Templo Teris',
+          site_title: 'Bienvenido al Templo Teris | Subliminales',
+          contact_title: 'Ponte en contacto conmigo:',
+          email_label: 'Email',
+          send_email: 'Enviar Email',
+          whatsapp_label: 'WhatsApp',
+          send_whatsapp: 'Enviar WhatsApp',
+          instagram_label: 'Instagram',
+          follow_instagram: 'Seguir en Instagram',
+          youtube_label: 'YouTube',
+          subscribe_youtube: 'Suscribirse a YouTube',
+          package_intro: 'Puedes solicitar un subliminal personalizado con potenciadores energéticos, protección y, si lo deseas, magia integrada.',
+          basic_package: '🔹 Paquete Básico – R$20',
+          intermediate_package: '🔸 Paquete Intermedio – R$30',
+          magic_package: '🔮 Paquete Mágico – R$77',
+          basic_features: ['Hasta 100 afirmaciones', 'Potenciador energético fuerte (con o sin magia, tú decides)', 'Protección vibracional fuerte', 'Edición básica', 'Música a tu elección o déjalo conmigo'],
+          intermediate_features: ['Hasta 200 afirmaciones', 'Potenciador energético fuerte (con o sin magia, tú decides)', 'Protección energética fuerte', 'Frecuencia vibracional opcional (ej: 432Hz, 528Hz)', 'Edición más equilibrada', 'Música personalizada según el tema'],
+          magic_features: ['Hasta 300 afirmaciones', 'Potenciador mágico con magia', 'Protección con sellado mágico', 'Frecuencia oculta espiritual', 'Creado en estado de trance', 'Edición completa con capas mágicas', 'Música a tu elección o canalizada'],
+          order_instructions_title: '📤 Cómo hacer tu pedido:',
+          order_instructions_text: 'Después de elegir el paquete, ve a la sección "Ordenar Ahora" y envía:',
+          order_requirements: ['Lo que quieres manifestar o transformar', 'Tipo de música (o déjalo conmigo)', 'Nombre deseado en el título (opcional)'],
+          payment_info: 'El pago puede hacerse antes o después de la entrega como prefieras.',
+          delivery_info: 'Una vez listo, recibirás acceso al audio y las afirmaciones.',
+          delivery_time_title: '⏱ Tiempo de entrega:',
+          delivery_time_items: ['Hasta 2 a 4 días hábiles (en caso de muchos pedidos) después del pago', 'Si ya está listo, lo envío el mismo día'],
+          cancel_button: 'Cancelar',
+          delete_button: 'Eliminar',
+          contact_message: '¡Siéntete libre de contactarme a través de cualquiera de estos canales. ¡Siempre estoy disponible para ayudar con tus pedidos de subliminales y aclarar dudas!',
+          custom_orders_title: '📦 Pedidos Personalizados',
+          free_orders_title: '🎁 Pedidos Gratuitos (YouTube)',
+          basic_feature_1: 'Hasta 100 afirmaciones',
+          basic_feature_2: 'Potenciador energético fuerte (con o sin magia, tú decides)',
+          basic_feature_3: 'Protección vibracional fuerte',
+          basic_feature_4: 'Edición básica',
+          basic_feature_5: 'Música a tu elección o déjalo conmigo',
+          intermediate_feature_1: 'Hasta 200 afirmaciones',
+          intermediate_feature_2: 'Potenciador energético fuerte (con o sin magia, tú decides)',
+          intermediate_feature_3: 'Protección energética fuerte',
+          intermediate_feature_4: 'Frecuencia vibracional opcional (ej: 432Hz, 528Hz)',
+          intermediate_feature_5: 'Edición más equilibrada',
+          intermediate_feature_6: 'Música personalizada según el tema',
+          magic_feature_1: 'Hasta 300 afirmaciones',
+          magic_feature_2: 'Potenciador mágico con magia',
+          magic_feature_3: 'Protección con sellado mágico',
+          magic_feature_4: 'Frecuencia oculta espiritual',
+          magic_feature_5: 'Creado en estado de trance',
+          magic_feature_6: 'Edición completa con capas mágicas',
+          magic_feature_7: 'Música a tu elección o canalizada',
+          order_requirement_1: 'Lo que quieres manifestar o transformar',
+          order_requirement_2: 'Tipo de música (o déjalo conmigo)',
+          order_requirement_3: 'Nombre deseado en el título (opcional)',
+          delivery_time_1: 'Hasta 2 a 4 días hábiles (en caso de muchos pedidos) después del pago',
+          delivery_time_2: 'Si ya está listo, lo envío el mismo día'
         }
     };
 
@@ -1414,12 +2100,13 @@
 
     // Admin state
     let isAdminLoggedIn = false;
-    let ordersEnabled = true;
     let freeOrdersEnabled = true;
+    let customOrdersEnabled = true;
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       loadLanguage();
+      loadAdminSettings(); // Carregar configurações salvas
       checkAdminLogin();
       loadPDFs();
       loadOrders();
@@ -1474,6 +2161,51 @@
       showNotification('Logout realizado com sucesso!', 'success');
     }
 
+    function loadAdminSettings() {
+      // Carregar configurações salvas do localStorage
+      let adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      
+      // Inicializar configurações padrão se não existirem
+      if (Object.keys(adminSettings).length === 0) {
+        adminSettings = {
+          freeOrdersEnabled: true,
+          customOrdersEnabled: true,
+          feedbackEnabled: true,
+          pdfsEnabled: true,
+          lastUpdate: new Date().toISOString()
+        };
+        localStorage.setItem('adminSettings', JSON.stringify(adminSettings));
+      }
+      
+      // Aplicar configurações salvas
+      if (adminSettings.freeOrdersEnabled !== undefined) {
+        freeOrdersEnabled = adminSettings.freeOrdersEnabled;
+      }
+      
+      if (adminSettings.customOrdersEnabled !== undefined) {
+        customOrdersEnabled = adminSettings.customOrdersEnabled;
+      }
+      
+      // Aplicar configurações na interface
+      applyAdminUpdates(adminSettings);
+      
+      // Atualizar mensagem de status
+      updateStatusMessage();
+    }
+
+    function updateStatusMessage() {
+      const statusMessage = document.getElementById('statusMessage');
+      if (statusMessage) {
+        if (freeOrdersEnabled && customOrdersEnabled) {
+          statusMessage.textContent = '✅ Aceitando Todos os Pedidos';
+        } else if (freeOrdersEnabled || customOrdersEnabled) {
+          statusMessage.textContent = '⚠️ Aceitando Pedidos Parcialmente';
+        } else {
+          statusMessage.textContent = '❌ Nenhum Pedido Aceito';
+        }
+      }
+    }
+
     function checkAdminLogin() {
       const adminLoggedIn = sessionStorage.getItem('adminLoggedIn');
       if (adminLoggedIn === 'true') {
@@ -1481,23 +2213,60 @@
         document.getElementById('adminControls').style.display = 'block';
         loadOrders();
         updateOrderStatus();
+        updateStatusMessage();
       }
     }
 
-    function toggleOrders() {
-      ordersEnabled = !ordersEnabled;
-      const status = ordersEnabled ? 'habilitados' : 'desabilitados';
-      document.getElementById('statusMessage').textContent = `Pedidos ${status}`;
-      showNotification(`Pedidos ${status}!`, 'success');
-      updateOrderStatus();
-    }
+
 
     function toggleFreeOrders() {
       freeOrdersEnabled = !freeOrdersEnabled;
-      const status = freeOrdersEnabled ? 'aceitando' : 'rejeitando';
-      document.getElementById('statusMessage').textContent = `Pedidos gratuitos: ${status}`;
-      showNotification(`Pedidos gratuitos: ${status}!`, 'success');
+      document.getElementById('statusMessage').textContent = freeOrdersEnabled ? 
+        translations[currentLanguage].free_orders_accepting : 
+        translations[currentLanguage].free_orders_rejecting;
       updateOrderStatus();
+      
+      // Update admin settings for real-time updates
+      updateAdminSettings('freeOrdersEnabled', freeOrdersEnabled);
+    }
+
+    function toggleCustomOrders() {
+      customOrdersEnabled = !customOrdersEnabled;
+      document.getElementById('statusMessage').textContent = customOrdersEnabled ? 
+        translations[currentLanguage].custom_orders_accepting : 
+        translations[currentLanguage].custom_orders_rejecting;
+      updateOrderStatus();
+      
+      // Update admin settings for real-time updates
+      updateAdminSettings('customOrdersEnabled', customOrdersEnabled);
+    }
+
+    function toggleFeedback() {
+      const currentSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      const feedbackEnabled = !currentSettings.feedbackEnabled;
+      
+      // Update admin settings for real-time updates
+      updateAdminSettings('feedbackEnabled', feedbackEnabled);
+      
+      // Show notification with correct status
+      const message = feedbackEnabled ? 
+        translations[currentLanguage].feedback_enabled : 
+        translations[currentLanguage].feedback_disabled;
+      showNotification(message + '!', 'success');
+    }
+
+    function togglePDFs() {
+      const currentSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      const pdfsEnabled = !currentSettings.pdfsEnabled;
+      
+      // Update admin settings for real-time updates
+      updateAdminSettings('pdfsEnabled', pdfsEnabled);
+      
+      // Show notification with correct status
+      const message = pdfsEnabled ? 
+        translations[currentLanguage].pdfs_enabled : 
+        translations[currentLanguage].pdfs_disabled;
+      showNotification(message + '!', 'success');
     }
 
     function updateOrderStatus() {
@@ -1507,26 +2276,34 @@
       const freeSubmitBtn = freeOrderForm.querySelector('.submit-btn');
       const customSubmitBtn = customOrderForm.querySelector('.submit-btn');
 
-      if (!ordersEnabled) {
-        statusIndicator.textContent = '❌ Pedidos Desabilitados';
-        statusIndicator.className = 'status-indicator status-not-accepting';
-        freeSubmitBtn.disabled = true;
-        customSubmitBtn.disabled = true;
-        freeSubmitBtn.textContent = 'Pedidos Desabilitados';
-        customSubmitBtn.textContent = 'Pedidos Desabilitados';
+      // Controlar pedidos gratuitos
+      if (freeOrdersEnabled) {
+        freeSubmitBtn.disabled = false;
+        freeSubmitBtn.textContent = 'Enviar Pedido Gratuito';
       } else {
-        statusIndicator.textContent = '✅ Aceitando Pedidos';
-        statusIndicator.className = 'status-indicator status-accepting';
+        freeSubmitBtn.disabled = true;
+        freeSubmitBtn.textContent = 'Pedidos Gratuitos Desabilitados';
+      }
+      
+      // Controlar encomendas personalizadas
+      if (customOrdersEnabled) {
         customSubmitBtn.disabled = false;
         customSubmitBtn.textContent = 'Enviar Encomenda';
-        
-        if (freeOrdersEnabled) {
-          freeSubmitBtn.disabled = false;
-          freeSubmitBtn.textContent = 'Enviar Pedido Gratuito';
-        } else {
-          freeSubmitBtn.disabled = true;
-          freeSubmitBtn.textContent = 'Pedidos Gratuitos Desabilitados';
-        }
+      } else {
+        customSubmitBtn.disabled = true;
+        customSubmitBtn.textContent = 'Encomendas Personalizadas Desabilitadas';
+      }
+      
+      // Atualizar status geral
+      if (freeOrdersEnabled && customOrdersEnabled) {
+        statusIndicator.textContent = '✅ Aceitando Todos os Pedidos';
+        statusIndicator.className = 'status-indicator status-accepting';
+      } else if (freeOrdersEnabled || customOrdersEnabled) {
+        statusIndicator.textContent = '⚠️ Aceitando Pedidos Parcialmente';
+        statusIndicator.className = 'status-indicator status-partial';
+      } else {
+        statusIndicator.textContent = '❌ Nenhum Pedido Aceito';
+        statusIndicator.className = 'status-indicator status-not-accepting';
       }
     }
 
@@ -1535,6 +2312,22 @@
         localStorage.clear();
         sessionStorage.clear();
         location.reload();
+      }
+    }
+
+    function resetAdminSettings() {
+      if (confirm('Tem certeza que deseja resetar as configurações administrativas para o padrão?')) {
+        const defaultSettings = {
+          freeOrdersEnabled: true,
+          customOrdersEnabled: true,
+          feedbackEnabled: true,
+          pdfsEnabled: true,
+          lastUpdate: new Date().toISOString()
+        };
+        
+        localStorage.setItem('adminSettings', JSON.stringify(defaultSettings));
+        applyAdminUpdates(defaultSettings);
+        showNotification('Configurações resetadas para o padrão!', 'success');
       }
     }
 
@@ -1569,6 +2362,11 @@
 
     function displayPDFs(pdfs) {
       const container = document.getElementById('pdfsContainer');
+      if (!container) {
+        console.error('Container de PDFs não encontrado');
+        return;
+      }
+      
       container.innerHTML = '';
 
       pdfs.forEach(pdf => {
@@ -1580,7 +2378,7 @@
         pdfCard.innerHTML = `
           <div class="pdf-category">${category}</div>
           <h3>${pdf.title}</h3>
-          <p>${pdf.description}</p>
+          <p>${pdf.description || ''}</p>
           <div class="pdf-actions">
             <a href="${pdf.url}" target="_blank" class="pdf-btn pdf-read">📖 Ler Online</a>
             <a href="${pdf.downloadUrl}" target="_blank" class="pdf-btn pdf-download">📥 Baixar</a>
@@ -1612,7 +2410,7 @@
             <option value="other" ${pdf.category === 'other' ? 'selected' : ''}>Outro</option>
           </select>
           <button onclick="savePDF(${index})">Salvar</button>
-          <button onclick="deletePDF(${index})" style="background: #8B0000;">Excluir</button>
+          <button onclick="deletePDF(${index})" style="background: #ff4444;" data-translate="delete_button">Excluir</button>
         `;
         
         container.appendChild(pdfManagement);
@@ -1637,7 +2435,7 @@
           <option value="other">Outro</option>
         </select>
         <button onclick="savePDF(${index})">Salvar</button>
-        <button onclick="deletePDF(${index})" style="background: #8B0000;">Excluir</button>
+        <button onclick="deletePDF(${index})" style="background: #ff4444;" data-translate="delete_button">Excluir</button>
       `;
       
       container.appendChild(pdfManagement);
@@ -1699,11 +2497,6 @@
     function submitFreeOrder(event) {
       event.preventDefault();
       
-      if (!ordersEnabled) {
-        showNotification('Pedidos estão desabilitados no momento!', 'error');
-        return;
-      }
-
       if (!freeOrdersEnabled) {
         showNotification('Pedidos gratuitos não estão sendo aceitos no momento!', 'error');
         return;
@@ -1735,8 +2528,8 @@
     function submitCustomOrder(event) {
       event.preventDefault();
       
-      if (!ordersEnabled) {
-        showNotification('Pedidos estão desabilitados no momento!', 'error');
+      if (!customOrdersEnabled) {
+        showNotification('Encomendas personalizadas não estão sendo aceitas no momento!', 'error');
         return;
       }
 
@@ -1801,7 +2594,7 @@
 
         orderDetails += `
           <p class="order-date">${date}</p>
-          <button onclick="deleteOrder(${index})" style="background: #8B0000; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Excluir</button>
+                          <button onclick="deleteOrder(${index})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;" data-translate="delete_button">Excluir</button>
         `;
         
         orderItem.innerHTML = orderDetails;
@@ -1821,9 +2614,9 @@
     function editComingSoon() {
       const comingSoonData = JSON.parse(localStorage.getItem('comingSoonData') || '{}');
       
-      document.getElementById('editTitle').value = comingSoonData.title || 'Manual Teris Completo – Em Breve Disponível para Venda';
+      document.getElementById('editTitle').value = comingSoonData.title || translations[currentLanguage].coming_soon_title;
       document.getElementById('editDescription').value = comingSoonData.description || 'Este não é um simples PDF. É uma chave. Um chamado. Um portal.';
-      document.getElementById('editFullContent').value = comingSoonData.fullContent || 'Com mais de 50 páginas, o Manual Teris Completo traz ensinamentos, práticas, diagnósticos espirituais, contato com seres sobrenaturais, técnicas de criação de subliminares com ou sem magia, e muito mais.';
+              document.getElementById('editFullContent').value = comingSoonData.fullContent || translations[currentLanguage].coming_soon_description;
       document.getElementById('editPrice').value = comingSoonData.price || 'R$111';
       document.getElementById('editPromoPrice').value = comingSoonData.promoPrice || 'R$77';
       document.getElementById('editPixKey').value = comingSoonData.pixKey || 'teris.ofc777@gmail.com';
@@ -1862,9 +2655,9 @@
       
       if (Object.keys(comingSoonData).length === 0) return;
       
-      const title = comingSoonData.title || 'Manual Teris Completo – Em Breve Disponível para Venda';
+      const title = comingSoonData.title || translations[currentLanguage].coming_soon_title;
       const description = comingSoonData.description || 'Este não é um simples PDF. É uma chave. Um chamado. Um portal.';
-      const fullContent = comingSoonData.fullContent || 'Com mais de 50 páginas, o Manual Teris Completo traz ensinamentos, práticas, diagnósticos espirituais, contato com seres sobrenaturais, técnicas de criação de subliminares com ou sem magia, e muito mais.';
+      const fullContent = comingSoonData.fullContent || translations[currentLanguage].coming_soon_description;
       const price = comingSoonData.price || 'R$111';
       const promoPrice = comingSoonData.promoPrice || 'R$77';
       const pixKey = comingSoonData.pixKey || 'teris.ofc777@gmail.com';
@@ -1895,7 +2688,7 @@
       if (priceElement) {
         priceElement.innerHTML = `
           <strong>Valor estimado: ${price}</strong><br>
-          <span style="color: #DC143C; font-size: 1.1em;">Com promoção de um ciclo lunar por ${promoPrice}</span>
+                          <span style="color: #00ff41; font-size: 1.1em;">Com promoção de um ciclo lunar por ${promoPrice}</span>
         `;
       }
       
@@ -2092,6 +2885,77 @@
       }, 3000);
     }
 
+    // Real-time updates functionality
+    let realTimeUpdateInterval;
+    let lastConfigUpdate = '';
+
+    function startRealTimeUpdates() {
+      // Check for config updates every 5 seconds
+      realTimeUpdateInterval = setInterval(checkForUpdates, 5000);
+    }
+
+    function checkForUpdates() {
+      // Check if admin made any changes
+      const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      const lastUpdate = adminSettings.lastUpdate || '';
+      
+      if (lastUpdate !== lastConfigUpdate) {
+        lastConfigUpdate = lastUpdate;
+        applyAdminUpdates(adminSettings);
+        
+        // Mostrar notificação apenas se não for o admin atual
+        if (!isAdminLoggedIn) {
+          showNotification('Site atualizado com as últimas mudanças!', 'success');
+        }
+      }
+    }
+
+    function applyAdminUpdates(settings) {
+      // Apply admin settings to the site
+      if (settings.freeOrdersEnabled !== undefined) {
+        // Atualizar variável global
+        freeOrdersEnabled = settings.freeOrdersEnabled;
+        
+        // Atualizar status dos formulários
+        updateOrderStatus();
+      }
+      
+      if (settings.customOrdersEnabled !== undefined) {
+        // Atualizar variável global
+        customOrdersEnabled = settings.customOrdersEnabled;
+        
+        // Atualizar status dos formulários
+        updateOrderStatus();
+      }
+      
+      if (settings.feedbackEnabled !== undefined) {
+        const feedbackSection = document.getElementById('feedbackSection');
+        if (feedbackSection) {
+          feedbackSection.style.display = settings.feedbackEnabled ? 'block' : 'none';
+        }
+      }
+      
+      if (settings.pdfsEnabled !== undefined) {
+        const pdfsSection = document.getElementById('pdfsSection');
+        if (pdfsSection) {
+          pdfsSection.style.display = settings.pdfsEnabled ? 'block' : 'none';
+        }
+      }
+      
+      // Atualizar mensagem de status
+      updateStatusMessage();
+    }
+
+    function updateAdminSettings(setting, value) {
+      const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      adminSettings[setting] = value;
+      adminSettings.lastUpdate = new Date().toISOString();
+      localStorage.setItem('adminSettings', JSON.stringify(adminSettings));
+      
+      // Apply changes immediately
+      applyAdminUpdates(adminSettings);
+    }
+
     function setupEventListeners() {
       // Admin form
       document.getElementById('adminForm').addEventListener('submit', function(e) {
@@ -2111,10 +2975,11 @@
       // Custom order form
       document.getElementById('customOrderForm').addEventListener('submit', submitCustomOrder);
 
-
-
       // Feedback form
       document.getElementById('feedbackForm').addEventListener('submit', submitFeedback);
+      
+      // Start real-time updates
+      startRealTimeUpdates();
     }
   </script>
 </body>
