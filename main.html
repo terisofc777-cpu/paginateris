@@ -1234,6 +1234,7 @@
             <button onclick="toggleFeedback()" id="toggleFeedbackBtn" data-translate="toggle_feedback">Habilitar/Desabilitar Feedback</button>
             <button onclick="togglePDFs()" id="togglePDFsBtn" data-translate="toggle_pdfs">Habilitar/Desabilitar PDFs</button>
             <button onclick="resetAdminSettings()" class="success">Resetar Configurações</button>
+            <button onclick="showCurrentSettings()" class="info" style="background: linear-gradient(45deg, #00aaff, #0088cc);">📋 Ver Configurações Atuais</button>
             <button onclick="clearAllData()" class="danger" data-translate="clear_data">Limpar Todos os Dados</button>
             <button onclick="logoutAdmin()" data-translate="logout">Sair</button>
           </div>
@@ -2166,7 +2167,7 @@
       showNotification('Logout realizado com sucesso!', 'success');
     }
 
-    function loadAdminSettings() {
+    async function loadAdminSettings() {
       console.log('Carregando configurações administrativas...');
       
       // Testar localStorage primeiro
@@ -2175,9 +2176,17 @@
         showNotification('Aviso: Armazenamento local não disponível. Algumas funcionalidades podem não funcionar corretamente.', 'warning');
       }
       
-      // Carregar configurações salvas do localStorage
-      let adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
-      console.log('Configurações carregadas do localStorage:', adminSettings);
+      // Carregar configurações do arquivo compartilhado
+      let adminSettings = {};
+      try {
+        const response = await fetch('admin-settings.json?t=' + Date.now()); // Cache busting
+        adminSettings = await response.json();
+        console.log('Configurações carregadas do arquivo compartilhado:', adminSettings);
+      } catch (error) {
+        console.log('Arquivo admin-settings.json não encontrado, usando localStorage...');
+        adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+        console.log('Configurações carregadas do localStorage:', adminSettings);
+      }
       
       // Inicializar configurações padrão se não existirem
       if (Object.keys(adminSettings).length === 0) {
@@ -2187,7 +2196,8 @@
           customOrdersEnabled: true,
           feedbackEnabled: true,
           pdfsEnabled: true,
-          lastUpdate: new Date().toISOString()
+          lastUpdate: new Date().toISOString(),
+          version: "1.0"
         };
         localStorage.setItem('adminSettings', JSON.stringify(adminSettings));
         console.log('Configurações padrão salvas:', adminSettings);
@@ -2963,20 +2973,37 @@
     }
     
     // Função para forçar sincronização completa
-    function forceSync() {
+    async function forceSync() {
       console.log('Forçando sincronização completa...');
       
       // Limpar lastConfigUpdate para forçar nova verificação
       lastConfigUpdate = '';
       
-      // Recarregar configurações do localStorage
-      const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      // Recarregar configurações do arquivo compartilhado
+      let adminSettings = {};
+      try {
+        const response = await fetch('admin-settings.json?t=' + Date.now());
+        adminSettings = await response.json();
+      } catch (error) {
+        adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      }
       
       // Aplicar configurações imediatamente
       applyAdminUpdates(adminSettings);
       
       // Verificar atualizações
       setTimeout(checkForUpdates, 500);
+      
+      showNotification('Sincronização forçada concluída!', 'success');
+    }
+    
+    // Função para mostrar as configurações atuais (para o admin atualizar o arquivo)
+    function showCurrentSettings() {
+      const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+      console.log('Configurações atuais para copiar para admin-settings.json:', adminSettings);
+      
+      const settingsText = JSON.stringify(adminSettings, null, 2);
+      alert('Copie estas configurações para o arquivo admin-settings.json:\n\n' + settingsText);
     }
     
     // Função para testar localStorage em dispositivos móveis
@@ -3074,10 +3101,18 @@
       setTimeout(checkForUpdates, 1000);
     }
 
-    function checkForUpdates() {
+    async function checkForUpdates() {
       try {
-        // Check if admin made any changes
-        const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+        // Check if admin made any changes from shared file
+        let adminSettings = {};
+        try {
+          const response = await fetch('admin-settings.json?t=' + Date.now()); // Cache busting
+          adminSettings = await response.json();
+        } catch (error) {
+          console.log('Erro ao carregar admin-settings.json, usando localStorage como fallback');
+          adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+        }
+        
         const lastUpdate = adminSettings.lastUpdate || '';
         
         console.log('Verificando atualizações - lastUpdate:', lastUpdate, 'lastConfigUpdate:', lastConfigUpdate);
@@ -3162,35 +3197,41 @@
       updateStatusMessage();
     }
 
-    function updateAdminSettings(setting, value) {
+    async function updateAdminSettings(setting, value) {
       console.log('Atualizando configuração administrativa:', setting, '=', value);
       
       try {
-        const adminSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+        // Carregar configurações atuais do arquivo compartilhado
+        let adminSettings = {};
+        try {
+          const response = await fetch('admin-settings.json');
+          adminSettings = await response.json();
+        } catch (error) {
+          console.log('Arquivo admin-settings.json não encontrado, criando novo...');
+          adminSettings = {
+            freeOrdersEnabled: true,
+            customOrdersEnabled: true,
+            feedbackEnabled: true,
+            pdfsEnabled: true,
+            lastUpdate: new Date().toISOString(),
+            version: "1.0"
+          };
+        }
+        
+        // Atualizar configuração
         adminSettings[setting] = value;
         adminSettings.lastUpdate = new Date().toISOString();
         
-        // Salvar no localStorage com verificação
+        // Salvar no localStorage como backup
         localStorage.setItem('adminSettings', JSON.stringify(adminSettings));
         
-        // Verificar se foi salvo corretamente
-        const savedSettings = JSON.parse(localStorage.getItem('adminSettings') || '{}');
-        console.log('Configurações salvas no localStorage:', savedSettings);
-        
-        // Verificar se a configuração foi realmente salva
-        if (savedSettings[setting] === value) {
-          console.log('✅ Configuração salva com sucesso no localStorage');
-        } else {
-          console.error('❌ Erro ao salvar configuração no localStorage');
-        }
+        console.log('Configurações atualizadas:', adminSettings);
         
         // Apply changes immediately
         applyAdminUpdates(adminSettings);
         
-        // Forçar verificação em outros dispositivos
-        setTimeout(() => {
-          checkForUpdates();
-        }, 1000);
+        // Mostrar notificação de sucesso
+        showNotification('Configuração atualizada e sincronizada!', 'success');
         
       } catch (error) {
         console.error('Erro ao atualizar configurações administrativas:', error);
